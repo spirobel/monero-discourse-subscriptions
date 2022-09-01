@@ -1,4 +1,4 @@
 plugins:
-  plugin_name_enabled:
+  monero_discourse_subscriptions_enabled:
     default: true
     client: true

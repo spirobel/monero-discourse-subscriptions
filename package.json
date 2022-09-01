@@ -1,8 +1,8 @@
 {
-  "name": "discourse-plugin-name",
+  "name": "monero-discourse-subscriptions",
   "version": "0.0.1",
   "repository": "TODO",
-  "author": "Discourse",
+  "author": "Spirobel",
   "license": "MIT",
   "devDependencies": {
     "eslint-config-discourse": "^3.1.0"
