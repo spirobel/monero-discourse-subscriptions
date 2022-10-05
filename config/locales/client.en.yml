@@ -2,3 +2,7 @@ en:
   js:
     monero_discourse_subscriptions_enabled:
       placeholder: placeholder
+    monero_discourse_subscriptions:
+      navigation:
+        subscribe: Subscribe with Monero
+
