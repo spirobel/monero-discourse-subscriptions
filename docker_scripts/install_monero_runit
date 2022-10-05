@@ -1,0 +1,11 @@
+#!/bin/bash
+exec docker exec \
+  -it \
+  -w '/src' \
+  -e RUBY_GLOBAL_METHOD_CACHE_SIZE=131072 \
+  -e LD_PRELOAD=/usr/lib/libjemalloc.so \
+  -e RAILS_ENV \
+  -e NO_EMBER_CLI \
+  -e QUNIT_RAILS_ENV \
+  discourse_dev \
+  /bin/bash -c "/pups/bin/pups /src/plugins/monero-discourse-subscriptions/wallet-service/monerochan-merchant-rpc.yml"

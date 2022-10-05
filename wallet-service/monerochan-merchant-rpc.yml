@@ -1,0 +1,9 @@
+
+run:
+ - file:
+     path: /etc/service/monerochan_merchant_rpc/run
+     chmod: "+x"
+     contents: |
+        #!/bin/sh
+        exec 2>&1
+        exec /src/plugins/monero-discourse-subscriptions/wallet-service/monerochan-merchant-rpc
