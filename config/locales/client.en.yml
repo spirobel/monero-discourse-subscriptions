@@ -1,4 +1,6 @@
 en:
+  site_settings:
+    monero_discourse_subscriptions_enabled: Enable the Monero Discourse Subscriptions plugin.
   js:
     monero_discourse_subscriptions_enabled:
       placeholder: placeholder
