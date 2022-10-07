@@ -1,7 +1,7 @@
 {
   "name": "monero-discourse-subscriptions",
   "version": "0.0.1",
-  "repository": "TODO",
+  "repository": "https://github.com/spirobel/monero-discourse-subscriptions",
   "author": "Spirobel",
   "license": "MIT",
   "devDependencies": {

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 # name: monero-discourse-subscriptions
-# about: TODO
+# about: This plugin enables you to give your users access to private Discourse groups and categories for Monero payments.
 # version: 0.0.1
 # authors: Discourse
-# url: TODO
+# url: https://github.com/spirobel/monero-discourse-subscriptions
 # required_version: 2.7.0
 
 enabled_site_setting :monero_discourse_subscriptions_enabled
