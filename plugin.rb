@@ -10,15 +10,17 @@
 enabled_site_setting :monero_discourse_subscriptions_enabled
 
 after_initialize do
-    module ::MoneroDiscourseSubscriptions
-        PLUGIN_NAME ||= "monero_discourse_subscription"
-    
-        class Engine < ::Rails::Engine
-          engine_name PLUGIN_NAME
-          isolate_namespace MoneroDiscourseSubscriptions
-        end
-    
-        class Error < StandardError; end
-      end
-    puts "plugin test"
+  add_admin_route 'monero_discourse_subscriptions.admin_navigation', 'monero-discourse-subscriptions.products'
+  Discourse::Application.routes.append do
+    get '/admin/plugins/monero-discourse-subscriptions' => 'admin/plugins#index', constraints: AdminConstraint.new
+    get '/admin/plugins/monero-discourse-subscriptions/products' => 'admin/plugins#index', constraints: AdminConstraint.new
+    get '/admin/plugins/monero-discourse-subscriptions/wallets' => 'admin/plugins#index', constraints: AdminConstraint.new
+
+    get '/admin/plugins/monero-discourse-subscriptions/wallets-json' => 'wallet/plugins#index', constraints: AdminConstraint.new
+    post '/admin/plugins/monero-discourse-subscriptions/wallets' => 'wallet/plugins#create', constraints: AdminConstraint.new
+    get '/admin/plugins/monero-discourse-subscriptions/wallets/:id' => 'wallet/plugins#show', constraints: AdminConstraint.new
+    patch '/admin/plugins/monero-discourse-subscriptions/wallets/:id' => 'wallet/plugins#update', constraints: AdminConstraint.new
+    delete '/admin/plugins/monero-discourse-subscriptions/wallets/:id' => 'wallet/plugins#delete', constraints: AdminConstraint.new
+
+  end
 end
