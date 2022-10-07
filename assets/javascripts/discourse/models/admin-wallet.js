@@ -4,7 +4,7 @@ import EmberObject from "@ember/object";
 const AdminWallet = EmberObject.extend({
 
   destroy() {
-    return ajax(`/admin/plugins/monero-discourse-subscriptions/wallets/${this.id}`, { method: "delete" });
+    return ajax(`/monero/wallets/${this.id}`, { method: "delete" });
   },
 
   save() {
@@ -18,7 +18,7 @@ const AdminWallet = EmberObject.extend({
       callback: this.callback
     };
 
-    return ajax("/admin/plugins/monero-discourse-subscriptions/wallets/", {
+    return ajax("/monero/wallets", {
       method: "post",
       data,
     }).then((wallet) => AdminWallet.create(wallet));
@@ -35,7 +35,7 @@ const AdminWallet = EmberObject.extend({
         callback: this.callback
     };
 
-    return ajax(`/admin/plugins/monero-discourse-subscriptions/wallets/${this.id}`, {
+    return ajax(`/monero/wallets/${this.id}`, {
       method: "patch",
       data,
     });
@@ -44,7 +44,7 @@ const AdminWallet = EmberObject.extend({
 
 AdminWallet.reopenClass({
   findAll() {
-    return ajax("/admin/plugins/monero-discourse-subscriptions/wallets-json", { method: "get" }).then((result) => {
+    return ajax("/monero/wallets", { method: "get" }).then((result) => {
       if (result === null) {
         return { unconfigured: true };
       }
@@ -53,7 +53,7 @@ AdminWallet.reopenClass({
   },
 
   find(id) {
-    return ajax(`/admin/plugins/monero-discourse-subscriptions/wallets/${id}`, {
+    return ajax(`/monero/wallets/${id}`, {
       method: "get",
     }).then((wallet) => AdminWallet.create(wallet));
   },
