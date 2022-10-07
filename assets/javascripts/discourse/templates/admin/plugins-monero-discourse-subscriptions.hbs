@@ -1,0 +1,28 @@
+<h2>{{i18n "monero_discourse_subscriptions.title" site_name=siteSettings.title}}</h2>
+
+
+
+  <ul class="nav nav-pills">
+    {{nav-item
+      route="adminPlugins.monero-discourse-subscriptions.products"
+      label="monero_discourse_subscriptions.admin.products.title"
+    }}
+    {{nav-item
+      route="adminPlugins.monero-discourse-subscriptions.subscriptions"
+      label="monero_discourse_subscriptions.admin.subscriptions.title"
+    }}
+    {{nav-item
+      route="adminPlugins.monero-discourse-subscriptions.payments"
+      label="monero_discourse_subscriptions.admin.payments.title"
+    }}
+    {{nav-item
+      route="adminPlugins.monero-discourse-subscriptions.wallets"
+      label="monero_discourse_subscriptions.admin.wallets.title"
+    }}
+  </ul>
+
+  <hr>
+
+  <div id="monero-discourse-subscriptions-admin">
+    {{outlet}}
+  </div>
