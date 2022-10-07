@@ -1,4 +1,4 @@
-class MoneroInvoice < ApplicationRecord
+class MoneroInvoice < ActiveRecord::Base
   has_many :monero_payments
   has_one :monero_subscriptions
   
