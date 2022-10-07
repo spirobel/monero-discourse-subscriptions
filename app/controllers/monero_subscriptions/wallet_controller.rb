@@ -1,9 +1,9 @@
 # frozen_string_literal: true
+
 module MoneroDiscourseSubscriptions
-  module Admin
-    class WalletController < ::Admin::AdminController
+    class WalletController < ::ApplicationController
       def index
-        wallets = MoneroWallet.all
+        wallets = ::MoneroWallet.all.to_a
         render_json_dump wallets
       end
 
@@ -42,5 +42,4 @@ module MoneroDiscourseSubscriptions
       end
   
     end
-  end
 end

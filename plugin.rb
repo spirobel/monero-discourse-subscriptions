@@ -9,18 +9,40 @@
 
 enabled_site_setting :monero_discourse_subscriptions_enabled
 
+
+
+
+
+
+
+
 after_initialize do
+  module ::MoneroDiscourseSubscriptions
+    class Engine < ::Rails::Engine
+      engine_name 'monero-discourse-subscriptions'
+      isolate_namespace MoneroDiscourseSubscriptions
+    end
+  end
+
+  require_relative "app/controllers/monero_subscriptions/wallet_controller.rb"
+  require_relative "app/models/monero_subscriptions/monero_wallet.rb"
+  MoneroDiscourseSubscriptions::Engine.routes.draw do
+    get '/wallets' => 'wallet#index', constraints: AdminConstraint.new
+    post '/wallets' => 'wallet#create', constraints: AdminConstraint.new
+    get '/wallets/:id' => 'wallets#show', constraints: AdminConstraint.new
+    patch '/wallets/:id' => 'wallet#update', constraints: AdminConstraint.new
+    delete '/wallets/:id' => 'wallet#delete', constraints: AdminConstraint.new
+
+  end
+
   add_admin_route 'monero_discourse_subscriptions.admin_navigation', 'monero-discourse-subscriptions.products'
   Discourse::Application.routes.append do
     get '/admin/plugins/monero-discourse-subscriptions' => 'admin/plugins#index', constraints: AdminConstraint.new
     get '/admin/plugins/monero-discourse-subscriptions/products' => 'admin/plugins#index', constraints: AdminConstraint.new
     get '/admin/plugins/monero-discourse-subscriptions/wallets' => 'admin/plugins#index', constraints: AdminConstraint.new
+    mount ::MoneroDiscourseSubscriptions::Engine, at: "/monero",  defaults: {format: "json"}
 
-    get '/admin/plugins/monero-discourse-subscriptions/wallets-json' => 'wallet/plugins#index', constraints: AdminConstraint.new
-    post '/admin/plugins/monero-discourse-subscriptions/wallets' => 'wallet/plugins#create', constraints: AdminConstraint.new
-    get '/admin/plugins/monero-discourse-subscriptions/wallets/:id' => 'wallet/plugins#show', constraints: AdminConstraint.new
-    patch '/admin/plugins/monero-discourse-subscriptions/wallets/:id' => 'wallet/plugins#update', constraints: AdminConstraint.new
-    delete '/admin/plugins/monero-discourse-subscriptions/wallets/:id' => 'wallet/plugins#delete', constraints: AdminConstraint.new
-
+  
   end
+
 end
