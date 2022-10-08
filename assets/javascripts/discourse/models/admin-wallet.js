@@ -1,21 +1,20 @@
 import { ajax } from "discourse/lib/ajax";
 import EmberObject from "@ember/object";
 
-const AdminWallet = EmberObject.extend({
-
-  destroy() {
+const AdminWallet = EmberObject.extend({});
+AdminWallet.reopenClass({
+    destroy() {
     return ajax(`/monero/wallets/${this.id}`, { method: "delete" });
   },
 
-  save() {
+  save(params) {
     const data = {
-      primaryAddress: this.primaryAddress,
-      privateViewKey: this.privateViewKey,
-      restoreHeight: this.restoreHeight,
-      stagenet: this.stagenet,
-      name: this.name,
-      serverUri: this.serverUri,
-      callback: this.callback
+      primaryAddress: params.primaryAddress,
+      privateViewKey: params.privateViewKey,
+      restoreHeight: params.restoreHeight,
+      stagenet: params.stagenet,
+      name: params.name,
+      serverUri: params.serverUri,
     };
 
     return ajax("/monero/wallets", {
@@ -32,7 +31,6 @@ const AdminWallet = EmberObject.extend({
         stagenet: this.stagenet,
         name: this.name,
         serverUri: this.serverUri,
-        callback: this.callback
     };
 
     return ajax(`/monero/wallets/${this.id}`, {
