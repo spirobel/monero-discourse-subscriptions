@@ -8,15 +8,7 @@ module MoneroDiscourseSubscriptions
       end
 
       def create
-        params.permit(      
-          :primaryAddress,
-          :privateViewKey,
-          :restoreHeight,
-          :stagenet,
-          :name,
-          :serverUri,
-          )
-          render_json_dump MoneroWallet.create(params)
+          render_json_dump MoneroWallet.create(wallet_create_params)
       end
       def update
         params.require(:id).permit(      
@@ -39,6 +31,17 @@ module MoneroDiscourseSubscriptions
         params.require(:id)
         wallet = MoneroWallet.find_by(params[:id])
         render_json_dump wallet
+      end
+
+      def wallet_create_params
+        params.permit(      
+          :primaryAddress,
+          :privateViewKey,
+          :restoreHeight,
+          :stagenet,
+          :name,
+          :serverUri,
+          )
       end
   
     end
