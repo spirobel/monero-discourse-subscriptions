@@ -20,7 +20,7 @@ en:
           name: Give your wallet a name so you can recognize it later
           primaryAddress: the primary address of your wallet
           privateViewKey: the private viewkey of your wallet
-          restoreHeight: the restore Height of your wallet
+          restoreHeight: the restore height of your wallet
           serverUri: the node address and port
           stagenet: is your wallet a stagenet wallet?
 
