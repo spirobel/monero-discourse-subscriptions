@@ -15,7 +15,7 @@ module MoneroDiscourseSubscriptions
           :stagenet,
           :name,
           :serverUri,
-          :callback)
+          )
           render_json_dump MoneroWallet.create(params)
       end
       def update
@@ -26,7 +26,7 @@ module MoneroDiscourseSubscriptions
           :stagenet,
           :name,
           :serverUri,
-          :callback)
+         )
         wallet = MoneroWallet.find_by(params[:id])
         render_json_dump wallet.update(params)
       end
