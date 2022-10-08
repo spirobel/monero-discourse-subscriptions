@@ -14,8 +14,6 @@ en:
           title: Products
         subscriptions:
           title: Subscriptions
-        payments:
-          title: Payments
         wallets:
           title: Wallets
 

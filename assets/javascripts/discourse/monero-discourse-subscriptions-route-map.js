@@ -1,7 +1,7 @@
 export default {
     resource: "admin.adminPlugins",
     path: "/plugins",
-  
+
     map() {
       this.route("monero-discourse-subscriptions", function () {
         this.route("products", function () {
@@ -11,11 +11,8 @@ export default {
             });
           });
         });
-  
-  
+
         this.route("subscriptions");
-        this.route("payments");
-        this.route("invoices");
         this.route("wallets");
 
 
