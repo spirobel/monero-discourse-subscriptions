@@ -1,0 +1,70 @@
+<div class="create-wallet-form">
+  <form class="form-horizontal">
+
+    <p>
+      <label for="name">
+        {{i18n "monero_discourse_subscriptions.admin.wallets.name"}}
+      </label>
+      {{input type="text" name="name" value=name}}
+    </p>
+
+
+
+    <p>
+      <label for="primaryAddress">
+        {{i18n "monero_discourse_subscriptions.admin.wallets.primaryAddress"}}
+      </label>
+      {{input type="text" name="primaryAddress" value=primaryAddress}}
+    </p>
+
+
+
+    <p>
+      <label for="privateViewKey">
+        {{i18n "monero_discourse_subscriptions.admin.wallets.privateViewKey"}}
+      </label>
+      {{input type="text" name="privateViewKey" value=privateViewKey}}
+    </p>
+
+
+    <p>
+      <label for="restoreHeight">
+        {{i18n "monero_discourse_subscriptions.admin.wallets.restoreHeight"}}
+      </label>
+      {{input type="number" name="restoreHeight" value=restoreHeight}}
+    </p>
+
+
+    <p>
+      <label for="serverUri">
+        {{i18n "monero_discourse_subscriptions.admin.wallets.serverUri"}}
+      </label>
+      {{input type="text" name="serverUri" value=serverUri}}
+    </p>
+
+    <p>
+      <label for="stagenet">
+        {{i18n "monero_discourse_subscriptions.admin.wallets.stagenet"}}
+      </label>
+      {{input type="checkbox" name="stagenet" checked=stagenet}}
+    </p>
+
+
+  </form>
+
+  {{d-button
+    action=(action "createNewWallet")
+    label="monero_discourse_subscriptions.admin.wallets.create"
+    title="monero_discourse_subscriptions.admin.wallets.create"
+    icon="plus"
+    class="btn-primary btn btn-icon"
+  }}
+
+  {{d-button
+    action=(action "cancelCreateWallet")
+    label="cancel"
+    title="cancel"
+    icon="times"
+    class="btn btn-icon"
+  }}
+</div>

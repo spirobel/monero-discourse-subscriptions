@@ -1,2 +1,18 @@
 {{model}}
-wallets
+
+  {{#unless creating}}
+    {{d-button
+      action=(action "openWalletCreateForm")
+      label="monero_discourse_subscriptions.admin.wallets.create"
+      title="monero_discourse_subscriptions.admin.wallets.create"
+      icon="plus"
+      class="btn btn-icon btn-primary create-wallet"
+    }}
+  {{/unless}}
+
+  {{#if creating}}
+    {{create-wallet-form
+      cancel=(action "closeWalletCreateForm")
+      create=(action "createNewWallet")
+    }}
+  {{/if}}
