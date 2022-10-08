@@ -1,21 +1,21 @@
 import { ajax } from "discourse/lib/ajax";
 import EmberObject from "@ember/object";
 
-const AdminMoneroProduct = EmberObject.extend({
-
+const AdminMoneroProduct = EmberObject.extend({});
+  AdminMoneroProduct.reopenClass({
 
   destroy() {
     return ajax(`/monero/products/${this.id}`, { method: "delete" });
   },
 
-  save() {
+  save(params) {
     const data = {
-      name: this.name,
-      description: this.description,
-      active: this.active,
-      position: this.position,
-      group: this.group,
-      monero_wallet: this.monero_wallet
+      name: params.name,
+      description: params.description,
+      active: params.active,
+      position: params.position,
+      group: params.group,
+      monero_wallet: params.monero_wallet
     };
 
     return ajax("/monero/products", {
