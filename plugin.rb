@@ -25,6 +25,8 @@ after_initialize do
   end
 
   require_relative "app/controllers/monero_subscriptions/wallet_controller.rb"
+  require_relative "app/controllers/monero_subscriptions/product_controller.rb"
+  require_relative "app/models/monero_subscriptions/monero_product.rb"
   require_relative "app/models/monero_subscriptions/monero_wallet.rb"
   MoneroDiscourseSubscriptions::Engine.routes.draw do
     get '/wallets' => 'wallet#index', constraints: AdminConstraint.new
@@ -33,6 +35,11 @@ after_initialize do
     patch '/wallets/:id' => 'wallet#update', constraints: AdminConstraint.new
     delete '/wallets/:id' => 'wallet#delete', constraints: AdminConstraint.new
 
+    get '/products' => 'product#index', constraints: AdminConstraint.new
+    post '/products' => 'product#create', constraints: AdminConstraint.new
+    get '/products/:id' => 'product#show', constraints: AdminConstraint.new
+    patch '/products/:id' => 'product#update', constraints: AdminConstraint.new
+    delete '/products/:id' => 'product#delete', constraints: AdminConstraint.new
   end
 
   add_admin_route 'monero_discourse_subscriptions.admin_navigation', 'monero-discourse-subscriptions.products'
