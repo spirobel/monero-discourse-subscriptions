@@ -12,6 +12,7 @@ en:
       admin:
         products:
           title: Products
+          product_help: Before cutomers can subscribe to your site, you need to create at least one product and an associated plan.
         subscriptions:
           title: Subscriptions
         wallets:
