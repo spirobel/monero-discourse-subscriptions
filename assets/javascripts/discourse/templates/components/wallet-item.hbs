@@ -1,0 +1,31 @@
+<h2>{{wallet.name}}</h2>
+
+<p class="wallet-primaryAddress">
+  {{wallet.primaryAddress}}
+</p>
+
+<p class="wallet-restoreHeight">
+  {{wallet.restoreHeight}}
+</p>
+
+<p class="wallet-stagenet">
+  {{wallet.stagenet}}
+</p>
+<p class="wallet-serverUri">
+  {{wallet.serverUri}}
+       {{d-button
+       action=(route-action "changeNode")
+       actionParam=wallet.id
+       icon="far-edit"
+       class="btn no-text btn-icon"
+     }}
+</p>
+
+<div class="wallet-align-buttons">
+     {{d-button
+       action=(route-action "destroyWallet")
+       actionParam=wallet.id
+       icon="trash-alt"
+       class="btn-danger btn no-text btn-icon"
+     }}
+</div>

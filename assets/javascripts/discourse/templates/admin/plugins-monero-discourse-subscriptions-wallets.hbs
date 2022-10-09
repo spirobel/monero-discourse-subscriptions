@@ -1,4 +1,4 @@
-{{model}}
+
 
   {{#unless creating}}
     {{d-button
@@ -16,3 +16,36 @@
       create=(action "createNewWallet")
     }}
   {{/if}}
+
+  {{#if model}}
+
+
+
+    {{#each model as |wallet|}}
+    {{wallet-item wallet=wallet }}
+  {{/each}}
+  
+  {{else}}
+    <p>
+      {{i18n "discourse_subscriptions.admin.products.product_help"}}
+    </p>
+  {{/if}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
