@@ -19,12 +19,5 @@ export default Controller.extend({
         })
         .catch(popupAjaxError);
     },
-    deleteWallet(wallet) {
-      AdminWallet.destroy(wallet)
-        .then(() => {
-          this.send("reloadModel");
-        })
-        .catch(popupAjaxError);
-    },
   },
 });
