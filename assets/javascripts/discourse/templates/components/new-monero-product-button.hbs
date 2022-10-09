@@ -1,0 +1,16 @@
+ <p class="btn-right">
+    {{#link-to
+      "adminPlugins.discourse-subscriptions.products.show"
+      "new"
+      class="btn btn-primary"
+      disabled=disableNewProduct
+    }}
+      {{d-icon "plus"}}
+      <span>
+        {{i18n "monero_discourse_subscriptions.admin.products.operations.new"}}
+      </span>
+    {{/link-to}}
+    {{#if disableNewProduct}}
+        {{i18n "monero_discourse_subscriptions.admin.wallets.wallet_help"}}
+    {{/if}}
+  </p>
