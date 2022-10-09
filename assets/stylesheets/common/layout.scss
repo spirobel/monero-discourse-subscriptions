@@ -1,0 +1,14 @@
+.wallets-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  
+    .wallet {
+      display: flex;
+      flex-flow: column nowrap;
+      border: 1px solid var(--primary-low);
+      padding: 1.5rem;
+      margin: 1rem;  
+ 
+    }
+}

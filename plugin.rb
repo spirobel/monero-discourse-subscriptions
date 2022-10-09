@@ -10,6 +10,8 @@
 enabled_site_setting :monero_discourse_subscriptions_enabled
 
 
+register_asset "stylesheets/common/layout.scss"
+register_asset "stylesheets/mobile/main.scss"
 
 
 

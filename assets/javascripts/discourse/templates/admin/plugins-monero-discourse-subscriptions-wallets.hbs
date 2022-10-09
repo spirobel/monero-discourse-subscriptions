@@ -20,11 +20,11 @@
   {{#if model}}
 
 
-
+<div class="wallets-list">
     {{#each model as |wallet|}}
     {{wallet-item wallet=wallet }}
   {{/each}}
-  
+  </div>
   {{else}}
     <p>
       {{i18n "monero_discourse_subscriptions.admin.wallets.wallet_help"}}
