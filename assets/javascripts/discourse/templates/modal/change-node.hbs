@@ -1,0 +1,13 @@
+{{#d-modal-body  title=title}}
+    <p>
+      <label for="serverUri">
+        {{i18n "monero_discourse_subscriptions.admin.wallets.operations.change_node.newServerUri"}}
+      </label>
+      {{input type="text" name="serverUri" value=serverUri}}
+    </p>
+
+{{/d-modal-body}}
+
+<div class="modal-footer">
+  {{d-button action="changeNode" class="btn-primary" label="monero_discourse_subscriptions.admin.wallets.operations.change_node.save_action"}}
+</div>

@@ -23,4 +23,11 @@ en:
           restoreHeight: the restore height of your wallet
           serverUri: the node address and port
           stagenet: is your wallet a stagenet wallet?
+          operations:
+            destroy:
+              confirm: Are you sure you want to destroy this wallet?
+            change_node:
+              modal_title: Change the address of the daemon
+              newServerUri: "Enter the address and port of the new node:"
+              save_action: Save new node!
 
