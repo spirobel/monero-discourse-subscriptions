@@ -5,12 +5,14 @@
 </p>
 
 <p class="wallet-restoreHeight">
-  {{wallet.restoreHeight}}
+  restore height: {{wallet.restoreHeight}}
 </p>
+  {{#if wallet.stagenet}}
 
 <p class="wallet-stagenet">
-  {{wallet.stagenet}}
+stagenet
 </p>
+  {{/if}}
 <p class="wallet-serverUri">
   {{wallet.serverUri}}
        {{d-button
