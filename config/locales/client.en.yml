@@ -15,6 +15,7 @@ en:
         subscriptions:
           title: Subscriptions
         wallets:
+          wallet_help: Before you can start creating products, you need to open at least one wallet.
           title: Wallets
           create: Open Wallet
           name: Give your wallet a name so you can recognize it later
