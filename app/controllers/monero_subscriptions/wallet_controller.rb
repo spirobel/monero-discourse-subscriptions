@@ -11,28 +11,14 @@ module MoneroDiscourseSubscriptions
           render_json_dump MoneroWallet.create(wallet_create_params)
       end
       def update
-        params.require(:id).permit(      
-          :primaryAddress,
-          :privateViewKey,
-          :restoreHeight,
-          :stagenet,
-          :name,
-          :serverUri,
-         )
-        wallet = MoneroWallet.find_by(params[:id])
-        render_json_dump wallet.update(params)
+        wallet = MoneroWallet.find_by_id(wallet_update_params[:id])
+        render_json_dump wallet.update(wallet_update_params)
       end
       def delete
         params.require(:id)
-        wallet = MoneroWallet.find_by(params[:id])
+        wallet = MoneroWallet.find_by_id(params[:id])
         render_json_dump wallet.destroy
       end
-      def show
-        params.require(:id)
-        wallet = MoneroWallet.find_by(params[:id])
-        render_json_dump wallet
-      end
-
       def wallet_create_params
         params.permit(      
           :primaryAddress,
@@ -42,6 +28,10 @@ module MoneroDiscourseSubscriptions
           :name,
           :serverUri,
           )
+      end
+
+      def wallet_update_params
+        params.permit(:serverUri, :id)
       end
   
     end
