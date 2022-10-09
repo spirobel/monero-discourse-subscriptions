@@ -3,8 +3,8 @@ import EmberObject from "@ember/object";
 
 const AdminWallet = EmberObject.extend({});
 AdminWallet.reopenClass({
-    destroy() {
-    return ajax(`/monero/wallets/${this.id}`, { method: "delete" });
+    destroy(id) {
+    return ajax(`/monero/wallets/${id}`, { method: "delete" });
   },
 
   save(params) {
@@ -23,17 +23,12 @@ AdminWallet.reopenClass({
     }).then((wallet) => AdminWallet.create(wallet));
   },
 
-  update() {
+  update(id, serverUri) {
     const data = {
-        primaryAddress: this.primaryAddress,
-        privateViewKey: this.privateViewKey,
-        restoreHeight: this.restoreHeight,
-        stagenet: this.stagenet,
-        name: this.name,
-        serverUri: this.serverUri,
+        serverUri,
     };
 
-    return ajax(`/monero/wallets/${this.id}`, {
+    return ajax(`/monero/wallets/${id}`, {
       method: "patch",
       data,
     });
@@ -48,12 +43,6 @@ AdminWallet.reopenClass({
       }
       return result.map((wallet) => AdminWallet.create(wallet));
     });
-  },
-
-  find(id) {
-    return ajax(`/monero/wallets/${id}`, {
-      method: "get",
-    }).then((wallet) => AdminWallet.create(wallet));
   },
 });
 
