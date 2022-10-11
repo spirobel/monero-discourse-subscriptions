@@ -1,0 +1,39 @@
+{{#unless creating}}
+     <p class="btn-right">
+    {{d-button
+      action=(action "openProductCreateForm")
+      disabled=disableNewProduct
+      label="monero_discourse_subscriptions.admin.products.operations.new"
+      title="monero_discourse_subscriptions.admin.products.operations.new"
+      icon="plus"
+      class="btn btn-icon btn-primary create-product"
+    }}
+
+
+
+    {{#if disableNewProduct}}
+        {{i18n "monero_discourse_subscriptions.admin.wallets.wallet_help"}}
+    {{/if}}
+  </p>
+  {{/unless}}
+
+  {{#if creating}}
+    {{create-product-form
+      cancel=(action "closeProductCreateForm")
+      create=(action "createNewProduct")
+    }}
+  {{/if}}
+
+  {{#if model}}
+
+
+<div class="products-list">
+    {{#each model as |product|}}
+    {{admin-product-item product=product  }}
+  {{/each}}
+  </div>
+  {{else}}
+    <p>
+      {{i18n "monero_discourse_subscriptions.admin.products.product_help"}}
+    </p>
+  {{/if}}
