@@ -21,4 +21,13 @@ export default Component.extend({
       }
      }
   },
+  @discourseComputed("wallets","product.monero_wallet_id")
+  stagenet(wallets,monero_wallet_id){
+    if(!wallets){return false}
+    for (let w of wallets) {
+      if(w.id === monero_wallet_id){
+        return w.stagenet;
+      }
+     }
+  },
 });
