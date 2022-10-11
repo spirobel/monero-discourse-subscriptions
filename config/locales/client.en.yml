@@ -25,6 +25,8 @@ en:
           product_help: Before cutomers can subscribe to your site, you need to create at least one product and an associated plan.
           operations:
             new: New Product
+            destroy:
+              confirm: Are you sure you want to destroy this product?
         subscriptions:
           title: Subscriptions
         wallets:
