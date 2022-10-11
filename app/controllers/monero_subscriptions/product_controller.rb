@@ -32,7 +32,7 @@ module MoneroDiscourseSubscriptions
       end
       def delete
         params.require(:id)
-        product = MoneroProduct.find_by(params[:id])
+        product = MoneroProduct.find_by_id(params[:id])
         render_json_dump product.destroy
       end
       def show
