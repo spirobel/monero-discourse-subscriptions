@@ -17,7 +17,11 @@ module MoneroDiscourseSubscriptions
       def delete
         params.require(:id)
         wallet = MoneroWallet.find_by_id(params[:id])
-        render_json_dump wallet.destroy
+        if MoneroProduct.where(monero_wallet_id: wallet.id).exists?
+          render_json_error "There is a product that uses this wallet. Delete it first!"
+        else
+          render_json_dump wallet.destroy
+        end
       end
       def wallet_create_params
         params.permit(      
