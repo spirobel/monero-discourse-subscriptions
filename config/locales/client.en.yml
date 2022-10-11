@@ -12,6 +12,16 @@ en:
       admin:
         products:
           title: Products
+          name: The name of your product
+          description: Description
+          description_help: This describes your subscription product.
+          wallet: Select the wallet that receives the money that people pay for this product
+          group: Select a group that customers of this product get access to
+          repurchaseable: Repurchaseable?
+          repurchaseable_help: Allow product and associated plans to be purchased multiple times
+          active: Active?
+          active_help: Toggle this off until your product is ready for consumers.
+          create: Create Product!
           product_help: Before cutomers can subscribe to your site, you need to create at least one product and an associated plan.
           operations:
             new: New Product

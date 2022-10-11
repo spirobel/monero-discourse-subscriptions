@@ -18,7 +18,7 @@
   {{/unless}}
 
   {{#if creating}}
-    {{create-product-form
+    {{create-product-form wallets=wallets
       cancel=(action "closeProductCreateForm")
       create=(action "createNewProduct")
     }}

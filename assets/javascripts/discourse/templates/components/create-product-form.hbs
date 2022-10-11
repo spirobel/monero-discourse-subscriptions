@@ -1,0 +1,93 @@
+<div class="create-product-form">
+  <form class="form-horizontal">
+
+    <p>
+      <label for="name">
+        {{i18n "monero_discourse_subscriptions.admin.products.name"}}
+      </label>
+      {{input type="text" name="name" value=name}}
+    </p>
+
+
+
+    <p>
+      <label for="description">
+        {{i18n "monero_discourse_subscriptions.admin.products.description"}}
+      </label>
+         {{textarea
+      name="description"
+      value=description
+      class="monero-discourse-subscriptions-admin-textarea"
+    }}
+        <div class="monero-form-helptext">
+      {{i18n "monero_discourse_subscriptions.admin.products.description_help"}}
+    </div>
+    </p>
+
+
+    <p>
+      <label>
+        {{i18n "monero_discourse_subscriptions.admin.products.wallet"}}
+      </label>
+          {{combo-box
+      nameProperty="name"
+      valueProperty="id"
+      content=wallets
+      value=monero_wallet
+      onChange=(action (mut monero_wallet))
+    }}
+    </p>
+
+
+
+    <p>
+      <label>
+        {{i18n "monero_discourse_subscriptions.admin.products.group"}}
+      </label>
+          {{combo-box
+      nameProperty="name"
+      valueProperty="id"
+      content=groups
+      value=group
+      onChange=(action (mut group))
+    }}
+    </p>
+
+
+    <p>
+      <label for="repurchaseable">
+        {{i18n "monero_discourse_subscriptions.admin.products.repurchaseable"}}
+      </label>
+      {{input type="checkbox" name="repurchaseable" checked=repurchaseable}}
+              <div class="monero-form-helptext">
+      {{i18n "monero_discourse_subscriptions.admin.products.repurchaseable_help"}}
+    </div>
+    </p>
+    <p>
+      <label for="active">
+        {{i18n "monero_discourse_subscriptions.admin.products.active"}}
+      </label>
+      {{input type="checkbox" name="active" checked=active}}
+              <div class="monero-form-helptext">
+      {{i18n "monero_discourse_subscriptions.admin.products.active_help"}}
+    </div>
+    </p>
+
+  </form>
+
+  {{d-button
+    action=(action "createNewProduct")
+    label="monero_discourse_subscriptions.admin.products.create"
+    title="monero_discourse_subscriptions.admin.products.create"
+    icon="plus"
+    class="btn-primary btn btn-icon"
+  }}
+
+  {{d-button
+    action=(action "cancelCreateProduct")
+    label="cancel"
+    title="cancel"
+    icon="times"
+    class="btn btn-icon"
+  }}
+</div>
