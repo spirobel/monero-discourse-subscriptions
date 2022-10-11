@@ -26,6 +26,7 @@ export default Component.extend({
       };
 
       this.create(createParams);
+      this.cancel();
     },
     cancelCreateProduct() {
       this.cancel();

@@ -20,7 +20,7 @@
   {{#if creating}}
     {{create-product-form wallets=wallets
       cancel=(action "closeProductCreateForm")
-      create=(action "createNewProduct")
+      create=(route-action "createNewProduct")
     }}
   {{/if}}
 

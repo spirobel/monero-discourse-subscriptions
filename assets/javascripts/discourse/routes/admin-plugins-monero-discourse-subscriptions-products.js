@@ -3,6 +3,7 @@ import AdminMoneroProduct from "../models/admin-monero-product";
 import showModal from 'discourse/lib/show-modal';
 import I18n from "I18n";
 import bootbox from "bootbox";
+import { popupAjaxError } from "discourse/lib/ajax-error";
 
 export default Route.extend({
   model() {
@@ -45,6 +46,16 @@ export default Route.extend({
             },
           }
         });
+  },
+  createNewProduct(params) {
+    AdminMoneroProduct.save(params)
+      .then(() => {
+        this.send("reloadModel");
+      })
+      .catch(popupAjaxError);
+  },
+  addPlansToProduct(product){
+    console.log("add plans ", product)
   }
   }
 });
