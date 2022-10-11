@@ -13,7 +13,6 @@ const AdminMoneroProduct = EmberObject.extend({});
       name: params.name,
       description: params.description,
       active: params.active,
-      repurchaseable: params.repurchaseable,
       position: params.position,
       group: params.group,
       monero_wallet: params.monero_wallet
@@ -30,7 +29,6 @@ const AdminMoneroProduct = EmberObject.extend({});
       name: params.name,
       description: params.description,
       active: params.active,
-      repurchaseable: params.repurchaseable,
       position: params.position,
       group: params.group,
       monero_wallet: params.monero_wallet
