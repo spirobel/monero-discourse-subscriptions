@@ -4,28 +4,22 @@
     {{html-safe product.description}}
 </p>
 <p >
-  funds get paid into  {{product.monero_wallet}}  wallet.
+  wallet:  {{walletName}} 
 </p>
 <p >
-  provides access to  {{product.group}} 
+  group:  {{groupName}} 
 </p>
 <p >
-  display position:  {{product.postion}} 
+  display position:  {{product.position}} 
 </p>
 
 
-  {{#unless product.repurchaseable}}
-
-<p class="admin-product-repurchaseable">
-repurchaseable
-</p>
-  {{/unless}}
 
 
   {{#unless product.active}}
 
 <p class="admin-product-active">
-active
+inactive
 </p>
   {{/unless}}
 

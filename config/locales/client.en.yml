@@ -23,6 +23,7 @@ en:
           active_help: Toggle this off until your product is ready for consumers.
           create: Create Product!
           product_help: Before cutomers can subscribe to your site, you need to create at least one product and an associated plan.
+          position: display position
           operations:
             new: New Product
             addPlans: Add Plans

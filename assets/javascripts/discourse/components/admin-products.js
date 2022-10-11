@@ -1,5 +1,6 @@
 import Component from "@ember/component";
 import AdminWallet from "../models/admin-wallet";
+import Group from "discourse/models/group";
 import discourseComputed from "discourse-common/utils/decorators";
 import { isEmpty } from "@ember/utils";
 
@@ -10,6 +11,9 @@ export default Component.extend({
         AdminWallet.findAll().then(data=>{
             that.set('wallets', data);
         });
+        Group.findAll().then(data=>{
+          that.set('groups', data);
+      });
     },
 
     actions: {

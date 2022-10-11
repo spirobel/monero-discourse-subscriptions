@@ -18,6 +18,28 @@
  
     }
 }
+.products-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+
+  .admin-product {
+    display: flex;
+    flex-flow: column nowrap;
+    border: 1px solid var(--primary-low);
+    padding: 1.5rem;
+    margin: 1rem;  
+    p {
+      margin-top: 0;
+    }
+    .admin-product-repurchaseable {
+      color: orange;
+    }
+    .admin-product-active {
+      color: orange;
+    }
+  }
+}
 .monero-form-helptext{
   color: var(--primary-medium);
   font-size: 0.875rem;

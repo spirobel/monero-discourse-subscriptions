@@ -5,4 +5,10 @@
         width: unset;
       }
     }
+    .products-list {
+      flex-flow: column nowrap;
+      .admin-product {
+        width: unset;
+      }
+    }
   }

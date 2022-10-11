@@ -18,7 +18,7 @@
   {{/unless}}
 
   {{#if creating}}
-    {{create-product-form wallets=wallets
+    {{create-product-form wallets=wallets groups=groups
       cancel=(action "closeProductCreateForm")
       create=(route-action "createNewProduct")
     }}
@@ -29,7 +29,7 @@
 
 <div class="products-list">
     {{#each model as |product|}}
-    {{admin-product-item product=product  }}
+    {{admin-product-item product=product  wallets=wallets groups=groups }}
   {{/each}}
   </div>
   {{else}}

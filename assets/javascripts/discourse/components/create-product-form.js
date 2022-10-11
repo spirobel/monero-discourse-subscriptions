@@ -1,5 +1,4 @@
 import Component from "@ember/component";
-import Group from "discourse/models/group";
 export default Component.extend({
   name: "Monerochan's cookies",
   description: "write a short description of your product",
@@ -8,11 +7,8 @@ export default Component.extend({
   group: null,
   monero_wallet: null,
   didInsertElement(){
-    let that = this;
-    Group.findAll().then(data=>{
-        that.set('groups', data);
-        that.set('monero_wallet',this.wallets[0].id);
-    });
+    this.set('monero_wallet',this.wallets[0].id);
+
 },
   actions: {
     createNewProduct() {

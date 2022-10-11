@@ -52,7 +52,12 @@
       onChange=(action (mut group))
     }}
     </p>
-
+    <p>
+      <label for="position">
+        {{i18n "monero_discourse_subscriptions.admin.products.position"}}
+      </label>
+      {{input type="number" name="position" value=position}}
+    </p>
 
     <p>
       <label for="active">
