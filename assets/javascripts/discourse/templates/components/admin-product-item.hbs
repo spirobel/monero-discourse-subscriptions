@@ -1,0 +1,54 @@
+<h2>{{product.name}}</h2>
+
+<p >
+    {{html-safe product.description}}
+</p>
+<p >
+  funds get paid into  {{product.monero_wallet}}  wallet.
+</p>
+<p >
+  provides access to  {{product.group}} 
+</p>
+<p >
+  display position:  {{product.postion}} 
+</p>
+
+
+  {{#unless product.repurchaseable}}
+
+<p class="admin-product-repurchaseable">
+repurchaseable
+</p>
+  {{/unless}}
+
+
+  {{#unless product.active}}
+
+<p class="admin-product-active">
+active
+</p>
+  {{/unless}}
+
+<div class="product-align-buttons">
+      {{d-button
+      action=(route-action "addPlansToProduct")
+      actionParam=product.id
+      label="monero_discourse_subscriptions.admin.products.operations.addPlans"
+      title="monero_discourse_subscriptions.admin.products.operations.addPlans"
+      icon="plus"
+      class="btn btn-icon btn-primary addPlans-product"
+    }}
+
+         {{d-button
+       action=(route-action "editProduct")
+       actionParam=product
+       icon="far-edit"
+       class="btn no-text btn-icon"
+     }}
+     {{d-button
+       action=(route-action "destroyProduct")
+       actionParam=product.id
+       icon="trash-alt"
+       class="btn-danger btn no-text btn-icon"
+     }}
+</div>
