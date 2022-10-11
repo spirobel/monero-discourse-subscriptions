@@ -8,15 +8,15 @@ module MoneroDiscourseSubscriptions
       end
 
       def create
-        params.permit(      
-          :name,
-          :description,
-          :restoreHeight,
-          :active,
-          :position,
-          :group,
-          :monero_wallet)
-          render_json_dump MoneroProduct.create(params)
+          group = Group.find_by_id(create_product_params[:group])
+          monero_wallet = MoneroWallet.find_by_id(create_product_params[:monero_wallet])
+          render_json_dump MoneroProduct.create(group: group,
+             monero_wallet: monero_wallet,
+              name: create_product_params[:name],
+              description: create_product_params[:description],
+              active: create_product_params[:active],
+              position: create_product_params[:position],
+              )
       end
       def update
         params.require(:id).permit(      
@@ -40,6 +40,15 @@ module MoneroDiscourseSubscriptions
         product = MoneroProduct.find_by(params[:id])
         render_json_dump product
       end
-  
+      
+      def create_product_params
+        params.permit(      
+          :name,
+          :description,
+          :active,
+          :position,
+          :group,
+          :monero_wallet)
+      end
     end
 end
