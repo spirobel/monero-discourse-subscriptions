@@ -4,8 +4,8 @@ import EmberObject from "@ember/object";
 const AdminMoneroProduct = EmberObject.extend({});
   AdminMoneroProduct.reopenClass({
 
-  destroy() {
-    return ajax(`/monero/products/${this.id}`, { method: "delete" });
+  destroy(id) {
+    return ajax(`/monero/products/${id}`, { method: "delete" });
   },
 
   save(params) {
@@ -13,6 +13,7 @@ const AdminMoneroProduct = EmberObject.extend({});
       name: params.name,
       description: params.description,
       active: params.active,
+      repurchaseable: params.repurchaseable,
       position: params.position,
       group: params.group,
       monero_wallet: params.monero_wallet
@@ -24,17 +25,18 @@ const AdminMoneroProduct = EmberObject.extend({});
     }).then((product) => AdminMoneroProduct.create(product));
   },
 
-  update() {
+  update(params) {
     const data = {
-      name: this.name,
-      description: this.description,
-      active: this.active,
-      position: this.position,
-      group: this.group,
-      monero_wallet: this.monero_wallet
+      name: params.name,
+      description: params.description,
+      active: params.active,
+      repurchaseable: params.repurchaseable,
+      position: params.position,
+      group: params.group,
+      monero_wallet: params.monero_wallet
     };
 
-    return ajax(`/monero/products/${this.id}`, {
+    return ajax(`/monero/products/${params.id}`, {
       method: "patch",
       data,
     });
