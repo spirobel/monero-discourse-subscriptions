@@ -33,6 +33,7 @@ module MoneroDiscourseSubscriptions
       def delete
         params.require(:id)
         product = MoneroProduct.find_by_id(params[:id])
+        product.monero_plans.clear
         render_json_dump product.destroy
       end
       
