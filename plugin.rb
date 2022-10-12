@@ -33,13 +33,11 @@ after_initialize do
   MoneroDiscourseSubscriptions::Engine.routes.draw do
     get '/wallets' => 'wallet#index', constraints: AdminConstraint.new
     post '/wallets' => 'wallet#create', constraints: AdminConstraint.new
-    get '/wallets/:id' => 'wallets#show', constraints: AdminConstraint.new
     patch '/wallets/:id' => 'wallet#update', constraints: AdminConstraint.new
     delete '/wallets/:id' => 'wallet#delete', constraints: AdminConstraint.new
 
     get '/products' => 'product#index', constraints: AdminConstraint.new
     post '/products' => 'product#create', constraints: AdminConstraint.new
-    get '/products/:id' => 'product#show', constraints: AdminConstraint.new
     patch '/products/:id' => 'product#update', constraints: AdminConstraint.new
     delete '/products/:id' => 'product#delete', constraints: AdminConstraint.new
   end
