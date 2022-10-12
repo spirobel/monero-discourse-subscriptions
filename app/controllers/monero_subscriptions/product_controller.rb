@@ -19,8 +19,16 @@ module MoneroDiscourseSubscriptions
               )
       end
       def update
-        wallet = MoneroProduct.find_by_id(update_product_params[:id])
-        render_json_dump wallet.update(update_product_params)
+        group = Group.find_by_id(update_product_params[:group])
+        monero_wallet = MoneroWallet.find_by_id(update_product_params[:monero_wallet])
+        product = MoneroProduct.find_by_id(update_product_params[:id])
+        render_json_dump product.update(group: group,
+          monero_wallet: monero_wallet,
+           name: update_product_params[:name],
+           description: update_product_params[:description],
+           active: update_product_params[:active],
+           position: update_product_params[:position],
+           )
       end
       def delete
         params.require(:id)
