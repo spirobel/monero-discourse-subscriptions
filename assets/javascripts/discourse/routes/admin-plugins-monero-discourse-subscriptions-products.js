@@ -37,7 +37,8 @@ export default Route.extend({
           model: {
             wallets,
             groups,
-            product,
+            product:Object.assign({}, product)
+            ,
             editProduct: (productParams) => {
                 AdminMoneroProduct.update(productParams).then(()=>{
                   this.refresh();

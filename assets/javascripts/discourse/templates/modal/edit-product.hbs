@@ -33,7 +33,7 @@
       valueProperty="id"
       content=model.wallets
       value=model.product.monero_wallet_id
-      onChange=(action (mut monero_wallet))
+      onChange=(action (mut model.product.monero_wallet_id))
     }}
     </p>
 
@@ -48,7 +48,7 @@
       valueProperty="id"
       content=model.groups
       value=model.product.group_id
-      onChange=(action (mut group))
+      onChange=(action (mut model.product.group_id))
     }}
     </p>
     <p>
