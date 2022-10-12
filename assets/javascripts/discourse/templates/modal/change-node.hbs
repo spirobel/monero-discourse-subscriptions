@@ -10,4 +10,11 @@
 
 <div class="modal-footer">
   {{d-button action="changeNode" class="btn-primary" label="monero_discourse_subscriptions.admin.wallets.operations.change_node.save_action"}}
+  {{d-button
+    action=(action "closeModal")
+    label="cancel"
+    title="cancel"
+    icon="times"
+    class="btn btn-icon"
+  }}
 </div>
