@@ -51,11 +51,6 @@ AdminMoneroProduct.reopenClass({
     });
   },
 
-  find(id) {
-    return ajax(`/monero/products/${id}`, {
-      method: "get",
-    }).then((product) => AdminMoneroProduct.create(product));
-  },
 });
 
 export default AdminMoneroProduct;
