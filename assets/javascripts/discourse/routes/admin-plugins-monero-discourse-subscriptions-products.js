@@ -32,9 +32,11 @@ export default Route.extend({
           }
         );
   },
-  editProduct(product){
+  editProduct(product,wallets, groups){
       showModal('edit-product', {
           model: {
+            wallets,
+            groups,
             product,
             editProduct: (productParams) => {
                 AdminMoneroProduct.update(productParams).then(()=>{

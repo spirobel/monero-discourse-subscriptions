@@ -29,6 +29,9 @@ en:
             addPlans: Add Plans
             destroy:
               confirm: Are you sure you want to destroy this product?
+            edit_product:
+              save_action: Save edit!
+              modal_title: Edit the production information
         subscriptions:
           title: Subscriptions
         wallets:

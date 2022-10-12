@@ -37,8 +37,7 @@ inactive
     }}
 
          {{d-button
-       action=(route-action "editProduct")
-       actionParam=product
+       action=(route-action "editProduct" product wallets groups)
        icon="far-edit"
        class="btn no-text btn-icon"
      }}

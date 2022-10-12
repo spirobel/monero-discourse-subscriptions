@@ -1,0 +1,83 @@
+{{#d-modal-body  title=title}}
+
+    <p>
+      <label for="name">
+        {{i18n "monero_discourse_subscriptions.admin.products.name"}}
+      </label>
+      {{input type="text" name="name" value=model.product.name}}
+    </p>
+
+
+
+    <p>
+      <label for="description">
+        {{i18n "monero_discourse_subscriptions.admin.products.description"}}
+      </label>
+         {{textarea
+      name="description"
+      value=model.product.description
+      class="monero-discourse-subscriptions-admin-textarea"
+    }}
+        <div class="monero-form-helptext">
+      {{i18n "monero_discourse_subscriptions.admin.products.description_help"}}
+    </div>
+    </p>
+
+
+    <p>
+      <label>
+        {{i18n "monero_discourse_subscriptions.admin.products.wallet"}}
+      </label>
+          {{combo-box
+      nameProperty="name"
+      valueProperty="id"
+      content=model.wallets
+      value=model.product.monero_wallet_id
+      onChange=(action (mut monero_wallet))
+    }}
+    </p>
+
+
+
+    <p>
+      <label>
+        {{i18n "monero_discourse_subscriptions.admin.products.group"}}
+      </label>
+          {{combo-box
+      nameProperty="name"
+      valueProperty="id"
+      content=model.groups
+      value=model.product.group_id
+      onChange=(action (mut group))
+    }}
+    </p>
+    <p>
+      <label for="position">
+        {{i18n "monero_discourse_subscriptions.admin.products.position"}}
+      </label>
+      {{input type="number" name="position" value=model.product.position}}
+    </p>
+
+    <p>
+      <label for="active">
+        {{i18n "monero_discourse_subscriptions.admin.products.active"}}
+      </label>
+      {{input type="checkbox" name="active" checked=model.product.active}}
+              <div class="monero-form-helptext">
+      {{i18n "monero_discourse_subscriptions.admin.products.active_help"}}
+    </div>
+    </p>
+
+
+{{/d-modal-body}}
+
+<div class="modal-footer">
+  {{d-button action="editProduct" class="btn-primary" label="monero_discourse_subscriptions.admin.products.operations.edit_product.save_action"}}
+  {{d-button
+    action=(action "closeModal")
+    label="cancel"
+    title="cancel"
+    icon="times"
+    class="btn btn-icon"
+  }}
+</div>
