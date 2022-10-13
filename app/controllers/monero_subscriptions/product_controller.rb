@@ -3,8 +3,9 @@
 module MoneroDiscourseSubscriptions
     class ProductController < ::ApplicationController
       def index
-        products = MoneroProduct.includes(:monero_plans).all.to_a
-        render_json_dump products
+        products = MoneroProduct.includes(:monero_plans).to_a 
+        puts products.inspect
+        render :json => products.to_json( :include => [:monero_plans] )
       end
 
       def create
