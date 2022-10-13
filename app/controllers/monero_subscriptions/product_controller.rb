@@ -18,15 +18,27 @@ module MoneroDiscourseSubscriptions
              position: create_product_params[:position],
              )
              product.monero_plans.create([
-              { currency: 'usd', amount: '0',duration:86400, active: false, position: 0 }, #daily
-              { currency: 'usd', amount: '0',duration:604800, active: false, position: 1 }, #weekly
-              { currency: 'usd', amount: '0',duration:2678400, active: false, position: 2 }, #monthly
-              { currency: 'usd', amount: '0',duration:31536000, active: false, position: 3 }, #yearly
+              { currency: 'usd', amount: '0',duration:86400, active: false, repurchaseable: true, position: 0 }, #daily
+              { currency: 'usd', amount: '0',duration:604800, active: false, repurchaseable: true, position: 1 }, #weekly
+              { currency: 'usd', amount: '0',duration:2678400, active: false, repurchaseable: true, position: 2 }, #monthly
+              { currency: 'usd', amount: '0',duration:31536000, active: false, repurchaseable: true, position: 3 }, #yearly
              ])
 
           render_json_dump product
       end
       def update_plans
+        plans = []
+        update_plans_params.each { |plan|
+          p = MoneroPlan.find_by_id(plan[:id])   
+          plans.append(p.update(
+            currency: plan[:currency],
+            amount: plan[:amount],
+            active: plan[:active],
+            repurchaseable: plan[:repurchaseable],
+            position: plan[:position],
+            ))
+          }
+        render_json_dump plans
       end
       def update
         group = Group.find_by_id(update_product_params[:group])
@@ -67,7 +79,7 @@ module MoneroDiscourseSubscriptions
           :monero_wallet)
       end
       def update_plans_params
-        params.permit
+        params.permit(:plans => [:currency, :amount,:active, :repurchaseable, :position, :id])
       end
     end
 end
