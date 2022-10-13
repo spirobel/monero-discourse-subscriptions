@@ -37,7 +37,7 @@ after_initialize do
     patch '/wallets/:id' => 'wallet#update', constraints: AdminConstraint.new
     delete '/wallets/:id' => 'wallet#delete', constraints: AdminConstraint.new
 
-    get '/products' => 'product#index', constraints: AdminConstraint.new
+    get '/products' => 'product#index'
     post '/products' => 'product#create', constraints: AdminConstraint.new
     patch '/products/:id' => 'product#update', constraints: AdminConstraint.new
     delete '/products/:id' => 'product#delete', constraints: AdminConstraint.new
