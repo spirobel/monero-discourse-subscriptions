@@ -3,7 +3,7 @@
 module MoneroDiscourseSubscriptions
     class ProductController < ::ApplicationController
       def index
-        products = ::MoneroProduct.all.to_a
+        products = MoneroProduct.includes(:monero_plans).all.to_a
         render_json_dump products
       end
 
@@ -55,7 +55,6 @@ module MoneroDiscourseSubscriptions
       def delete
         params.require(:id)
         product = MoneroProduct.find_by_id(params[:id])
-        product.monero_plans.clear
         render_json_dump product.destroy
       end
       
