@@ -10,13 +10,23 @@ module MoneroDiscourseSubscriptions
       def create
           group = Group.find_by_id(create_product_params[:group])
           monero_wallet = MoneroWallet.find_by_id(create_product_params[:monero_wallet])
-          render_json_dump MoneroProduct.create(group: group,
-             monero_wallet: monero_wallet,
-              name: create_product_params[:name],
-              description: create_product_params[:description],
-              active: create_product_params[:active],
-              position: create_product_params[:position],
-              )
+          product = MoneroProduct.create(group: group,
+            monero_wallet: monero_wallet,
+             name: create_product_params[:name],
+             description: create_product_params[:description],
+             active: create_product_params[:active],
+             position: create_product_params[:position],
+             )
+             product.monero_plans.create([
+              { currency: 'usd', amount: '0',duration:86400, active: false, position: 0 }, #daily
+              { currency: 'usd', amount: '0',duration:604800, active: false, position: 1 }, #weekly
+              { currency: 'usd', amount: '0',duration:2678400, active: false, position: 2 }, #monthly
+              { currency: 'usd', amount: '0',duration:31536000, active: false, position: 3 }, #yearly
+             ])
+
+          render_json_dump product
+      end
+      def update_plans
       end
       def update
         group = Group.find_by_id(update_product_params[:group])
@@ -55,6 +65,9 @@ module MoneroDiscourseSubscriptions
           :position,
           :group,
           :monero_wallet)
+      end
+      def update_plans_params
+        params.permit
       end
     end
 end

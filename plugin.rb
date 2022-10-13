@@ -28,6 +28,7 @@ after_initialize do
 
   require_relative "app/controllers/monero_subscriptions/wallet_controller.rb"
   require_relative "app/controllers/monero_subscriptions/product_controller.rb"
+  require_relative "app/models/monero_subscriptions/monero_plan.rb"
   require_relative "app/models/monero_subscriptions/monero_product.rb"
   require_relative "app/models/monero_subscriptions/monero_wallet.rb"
   MoneroDiscourseSubscriptions::Engine.routes.draw do
