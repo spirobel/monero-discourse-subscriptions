@@ -1,0 +1,64 @@
+{{#d-modal-body  title=title}}
+
+  <table class="table plans-list">
+      <thead>
+        <tr>
+                    <th>
+            {{i18n "monero_discourse_subscriptions.admin.products.plans_table.head.duration"}}
+          </th>
+          <th>
+            {{i18n "monero_discourse_subscriptions.admin.products.plans_table.head.currency"}}
+          </th>
+          <th>
+            {{i18n "monero_discourse_subscriptions.admin.products.plans_table.head.amount"}}
+          </th>
+                    <th>
+            {{i18n "monero_discourse_subscriptions.admin.products.plans_table.head.repurchaseable"}}
+          </th>
+                    <th>
+            {{i18n "monero_discourse_subscriptions.admin.products.plans_table.head.position"}}
+          </th>
+            <th>
+            {{i18n "monero_discourse_subscriptions.admin.products.plans_table.head.active"}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+    {{#each model.product.monero_plans as |plan|}}
+          <tr>
+            <td>
+              {{plan.durationDisplay}}
+            </td>
+            <td>
+              {{plan.currency}}
+            </td>
+            <td>
+              {{plan.amount}}
+            </td>
+              <td>
+              {{plan.repurchaseable}}
+            </td>
+              <td>
+              {{plan.position}}
+            </td>
+            <td>
+              {{plan.active}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+
+{{/d-modal-body}}
+
+<div class="modal-footer">
+  {{d-button action="updatePlans" class="btn-primary" label="monero_discourse_subscriptions.admin.products.operations.add_plans.save_action"}}
+  {{d-button
+    action=(action "closeModal")
+    label="cancel"
+    title="cancel"
+    icon="times"
+    class="btn btn-icon"
+  }}
+</div>
