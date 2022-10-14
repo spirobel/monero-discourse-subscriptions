@@ -80,7 +80,9 @@ export default Route.extend({
         new_plan.durationDisplay = makeDurationDisplay(old_plan);
         new_product.monero_plans.push(new_plan);
       }
-
+      new_product.monero_plans.sort((a,b)=> {
+        return  a.duration - b.duration;
+      });
 
     showModal('add-plans', {
       model: {
