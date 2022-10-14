@@ -58,9 +58,33 @@ export default Route.extend({
       .catch(popupAjaxError);
   },
   addPlansToProduct(product){
+
+    let new_product = Object.assign({}, product);
+
+
+
+      const makeDurationDisplay = function(plan){
+        if(plan.duration === 86400)
+        {return I18n.t("monero_discourse_subscriptions.admin.products.plans_table.daily");}
+          if(plan.duration === 604800)
+          {return I18n.t("monero_discourse_subscriptions.admin.products.plans_table.weekly");}
+            if(plan.duration === 2678400)
+            {return I18n.t("monero_discourse_subscriptions.admin.products.plans_table.monthly");}
+              if(plan.duration === 31536000)
+              {return I18n.t("monero_discourse_subscriptions.admin.products.plans_table.yearly");}
+      };
+      new_product.monero_plans = [];
+      for(let old_plan of product.monero_plans){
+        let new_plan = Object.assign({}, old_plan);
+
+        new_plan.durationDisplay = makeDurationDisplay(old_plan);
+        new_product.monero_plans.push(new_plan);
+      }
+
+
     showModal('add-plans', {
       model: {
-        product:Object.assign({}, product),
+        product:new_product,
         updatePlans: (plansParams) => {
             AdminMoneroProduct.updatePlans(plansParams).then(()=>{
               this.refresh();
