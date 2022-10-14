@@ -29,20 +29,28 @@
             <td>
               {{plan.durationDisplay}}
             </td>
-            <td>
-              {{plan.currency}}
+            <td class="monero-plan-currency-input">
+              {{combo-box
+                nameProperty="name"
+                valueProperty="id"
+                content=currencies
+                value=plan.currency
+                onChange=(action (mut plan.currency))
+              }}
+            </td>
+            <td class="monero-plan-amount-input">
+                {{input type="text" name="amount" value=plan.amount}}
+            </td>
+              <td class="monero-plan-repurchaseable-input">
+               {{input type="checkbox" name="repurchaseable" checked=plan.repurchaseable}}
+
+            </td>
+              <td class="monero-plan-position-input">
+                {{input type="number" name="position" value=plan.position}}
             </td>
             <td>
-              {{plan.amount}}
-            </td>
-              <td>
-              {{plan.repurchaseable}}
-            </td>
-              <td>
-              {{plan.position}}
-            </td>
-            <td>
-              {{plan.active}}
+                {{input type="checkbox" name="active" checked=plan.active}}
+
             </td>
           </tr>
         {{/each}}

@@ -55,3 +55,31 @@
   color: var(--primary-medium);
   font-size: 0.875rem;
 }
+.monero-plan-currency-input{
+  details {
+    width: 70px !important;
+    margin-bottom: 5px;
+    margin-top: 5px;
+
+  }
+ 
+}
+.monero-plan-repurchaseable-input{
+  input{
+    margin-left: 47%;
+  }
+}
+.monero-plan-amount-input{
+  input{
+    width: 100px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+}
+.monero-plan-position-input{
+  input{
+    width: 50px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+}
