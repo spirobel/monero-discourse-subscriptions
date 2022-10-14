@@ -32,6 +32,20 @@ en:
             edit_product:
               save_action: Save edit!
               modal_title: Edit the production information
+            add_plans:
+              modal_title: Change Product Plans
+          plans_table:
+            head:
+              duration: Duration
+              currency: Currency
+              amount: Amount
+              active: Active
+              repurchaseable: Repurchaseable
+              position: Position
+            daily: Daily
+            weekly: Weekly
+            monthly: Monthly
+            yearly: Yearly
         subscriptions:
           title: Subscriptions
         wallets:
