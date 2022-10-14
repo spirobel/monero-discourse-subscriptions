@@ -39,6 +39,24 @@ const AdminMoneroProduct = EmberObject.extend({});
       data,
     });
   },
+  updatePlans(plansParams) {
+    let plans = [];
+    for (let plan of plansParams) {
+      plans.push({
+        currency: plan.currency,
+        amount: plan.amount,
+        active: plan.active,
+        repurchaseable: plan.repurchaseable,
+        position: plan.position,
+        id: plan.id,
+      });
+     }
+     const data = {plans};
+    return ajax(`/monero/products_plans/`, {
+      method: "patch",
+      data,
+    });
+  },
 });
 
 AdminMoneroProduct.reopenClass({
