@@ -58,7 +58,19 @@ export default Route.extend({
       .catch(popupAjaxError);
   },
   addPlansToProduct(product){
-    console.log("add plans ", product)
+    showModal('add-plans', {
+      model: {
+        product:Object.assign({}, product),
+        updatePlans: (plansParams) => {
+            AdminMoneroProduct.updatePlans(plansParams).then(()=>{
+              this.refresh();
+          })
+          .catch((data) =>
+          bootbox.alert(data.jqXHR.responseJSON.errors.join("\n"))
+        );
+        },
+      }
+    });
   }
   }
 });
