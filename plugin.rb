@@ -40,6 +40,7 @@ after_initialize do
     get '/products' => 'product#index'
     post '/products' => 'product#create', constraints: AdminConstraint.new
     patch '/products/:id' => 'product#update', constraints: AdminConstraint.new
+    patch '/products_plans/' => 'product#update_plans', constraints: AdminConstraint.new
     delete '/products/:id' => 'product#delete', constraints: AdminConstraint.new
   end
 

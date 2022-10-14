@@ -29,8 +29,8 @@ module MoneroDiscourseSubscriptions
       end
       def update_plans
         plans = []
-        update_plans_params.each { |plan|
-          p = MoneroPlan.find_by_id(plan[:id])   
+        update_plans_params[:plans].each { |k, plan|
+          p = MoneroPlan.find_by_id(plan[:id])
           plans.append(p.update(
             currency: plan[:currency],
             amount: plan[:amount],
