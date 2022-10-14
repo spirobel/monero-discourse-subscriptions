@@ -34,6 +34,8 @@ en:
               modal_title: Edit the production information
             add_plans:
               modal_title: Change Product Plans
+              save_action: Change Plans!
+
           plans_table:
             head:
               duration: Duration
