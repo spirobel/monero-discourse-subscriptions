@@ -5,11 +5,10 @@ export default {
   name: "setup-monero-subscriptions",
   initialize(container) {
     withPluginApi("0.8.11", (api) => {
-        console.log("hi bro")
         api.addNavigationBarItem({
           name: "monero-subscribe",
           displayName: I18n.t("monero_discourse_subscriptions.navigation.subscribe"),
-          href: "/s",
+          href: "/monero/products",
         });
       
 
