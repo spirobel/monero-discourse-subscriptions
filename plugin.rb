@@ -49,7 +49,7 @@ after_initialize do
     get '/admin/plugins/monero-discourse-subscriptions' => 'admin/plugins#index', constraints: AdminConstraint.new
     get '/admin/plugins/monero-discourse-subscriptions/products' => 'admin/plugins#index', constraints: AdminConstraint.new
     get '/admin/plugins/monero-discourse-subscriptions/wallets' => 'admin/plugins#index', constraints: AdminConstraint.new
-    mount ::MoneroDiscourseSubscriptions::Engine, at: "/monero",  defaults: {format: "json"}
+    mount ::MoneroDiscourseSubscriptions::Engine, at: "/monero"
 
   
   end
