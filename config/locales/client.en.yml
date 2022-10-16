@@ -5,6 +5,9 @@ en:
     monero_discourse_subscriptions_enabled:
       placeholder: placeholder
     monero_discourse_subscriptions:
+      subscribe:
+        unauthenticated: Log in or create an account to subscribe.
+
       navigation:
         subscribe: Subscribe with Monero
       title: Monero Subscriptions
