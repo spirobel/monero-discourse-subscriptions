@@ -1,0 +1,10 @@
+{{#unless isLoggedIn}}
+  {{monero-login-required}}
+{{/unless}}
+
+
+<div class="monero-products-list">
+    {{#each model as |product|}}
+    {{monero-product-item product=product isLoggedIn=isLoggedIn}}
+  {{/each}}
+  </div>
