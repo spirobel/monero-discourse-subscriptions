@@ -11,4 +11,10 @@
         width: unset;
       }
     }
+    .monero-products-list {
+      flex-flow: column nowrap;
+      .monero-product {
+        width: unset;
+      }
+    }
   }

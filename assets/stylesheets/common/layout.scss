@@ -1,3 +1,27 @@
+.monero-products-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+
+  .monero-product {
+    display: flex;
+    flex-flow: column nowrap;
+    border: 1px solid var(--primary-low);
+    padding: 1.5rem;
+    margin: 1rem;  
+    width: calc(50% - 200px);
+
+    p {
+      margin-top: 0;
+    }
+
+    .wallet-stagenet {
+      color: orange;
+    }
+  }
+}
+
+
 .wallets-list {
     display: flex;
     flex-flow: row wrap;
