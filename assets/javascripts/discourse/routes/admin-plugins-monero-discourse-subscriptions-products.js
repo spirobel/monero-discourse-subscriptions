@@ -72,6 +72,8 @@ export default Route.extend({
             {return I18n.t("monero_discourse_subscriptions.admin.products.plans_table.monthly");}
               if(plan.duration === 31536000)
               {return I18n.t("monero_discourse_subscriptions.admin.products.plans_table.yearly");}
+              if(plan.duration === 99999999)
+              {return I18n.t("monero_discourse_subscriptions.admin.products.plans_table.lifetime");}
       };
       new_product.monero_plans = [];
       for(let old_plan of product.monero_plans){

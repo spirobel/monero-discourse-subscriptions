@@ -29,6 +29,7 @@ module MoneroDiscourseSubscriptions
               { currency: 'usd', amount: '0',duration:604800, active: false, repurchaseable: true, position: 1 }, #weekly
               { currency: 'usd', amount: '0',duration:2678400, active: false, repurchaseable: true, position: 2 }, #monthly
               { currency: 'usd', amount: '0',duration:31536000, active: false, repurchaseable: true, position: 3 }, #yearly
+              { currency: 'usd', amount: '0',duration:99999999, active: false, repurchaseable: true, position: 4 }, #lifetime
              ])
 
           render_json_dump product
