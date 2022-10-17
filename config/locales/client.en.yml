@@ -51,6 +51,7 @@ en:
             weekly: Weekly
             monthly: Monthly
             yearly: Yearly
+            lifetime: Lifetime
         subscriptions:
           title: Subscriptions
         wallets:
