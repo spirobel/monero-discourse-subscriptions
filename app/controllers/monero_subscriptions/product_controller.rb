@@ -4,14 +4,18 @@ module MoneroDiscourseSubscriptions
     class ProductController < ::ApplicationController
       def index
         products = MoneroProduct.includes(:monero_plans).to_a 
-        render :json => products.to_json( :include => [:monero_plans] )
+        products.each {|product|
+          product.subscribed= false
+        } 
+        render :json => products.to_json( :include => [:monero_plans], :methods => [:subscribed, :stagenet, :end_date] )
       end
 
       
       def show
         params.require(:id)
         product = MoneroProduct.includes(:monero_plans).find_by_id(params[:id])
-        render :json => product.to_json( :include => [:monero_plans] )
+        product.subscribed= false
+        render :json => product.to_json( :include => [:monero_plans],:methods => [:subscribed, :stagenet]  )
       end
 
       def create

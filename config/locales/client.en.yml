@@ -7,7 +7,9 @@ en:
     monero_discourse_subscriptions:
       subscribe:
         unauthenticated: Log in or create an account to subscribe.
-
+        title: Subscribe
+        prolong: Prolong!
+        subscribed_until: "You are subscribed until:"
       navigation:
         subscribe: Subscribe with Monero
       title: Monero Subscriptions
