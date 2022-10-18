@@ -1,0 +1,42 @@
+<div class="discourse-subscriptions-section-columns">
+  <div class="section-column discourse-subscriptions-confirmation-billing">
+    <h2>
+      {{model.name}}
+    </h2>
+
+    <hr>
+
+    <p>
+      {{html-safe model.description}}
+    </p>
+      {{#if model.stagenet}}
+
+<p class="wallet-stagenet">
+stagenet
+</p>
+  {{/if}}
+  </div>
+
+  <div class="section-column">
+      <h2>
+        {{i18n "discourse_subscriptions.subscribe.card.title"}}
+      </h2>
+
+      <hr>
+      <p>
+  {{i18n "monero_discourse_subscriptions.plans.select"}}
+</p>
+<div class="monero-subscribe-buttons">
+    {{#each model.monero_plans as |plan|}}
+
+
+{{monero-plan-button plan=plan selectedPlanId=selectedPlanId planClick=(action 'planClick')}}
+
+  {{/each}}
+  </div>
+      <hr>
+
+      subscribe-card cardElement=cardElement
+      {{selectedPlanId}}
+  </div>
+</div>
