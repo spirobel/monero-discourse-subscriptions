@@ -41,6 +41,12 @@
 .wallet-stagenet {
   color: orange;
 }
+.wallet-primaryAddress {
+  width: 200px;
+  word-wrap: break-word;
+  display: inline-block;
+}
+
 .monero-subscribe-buttons {
   align-items: stretch;
   display: flex;
