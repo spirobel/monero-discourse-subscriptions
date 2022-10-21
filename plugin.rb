@@ -33,6 +33,7 @@ after_initialize do
   require_relative "app/models/monero_subscriptions/monero_wallet.rb"
   MoneroDiscourseSubscriptions::Engine.routes.draw do
     get '/wallets' => 'wallet#index', constraints: AdminConstraint.new
+    get '/walletstatus' => 'wallet#status', constraints: AdminConstraint.new
     post '/wallets' => 'wallet#create', constraints: AdminConstraint.new
     patch '/wallets/:id' => 'wallet#update', constraints: AdminConstraint.new
     delete '/wallets/:id' => 'wallet#delete', constraints: AdminConstraint.new

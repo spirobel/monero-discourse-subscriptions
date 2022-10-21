@@ -10,6 +10,22 @@ module MoneroDiscourseSubscriptions
         render_json_dump wallets
       end
 
+      def status
+        uri = URI.parse("http://localhost:3001/v1/wallets/status")
+        request = Net::HTTP::Get.new(uri)
+        request["Accept"] = "application/json"
+
+        req_options = {
+          use_ssl: uri.scheme == "https",
+        }
+
+        response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+          http.request(request)
+        end
+
+        render_json_dump JSON.parse(response.body)
+      end
+
       def create
         network = "mainnet"
         if wallet_create_params[:stagenet]
