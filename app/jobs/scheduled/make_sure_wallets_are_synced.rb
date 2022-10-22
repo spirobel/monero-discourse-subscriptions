@@ -30,7 +30,7 @@ module ::Jobs
         wallets_sql.each { |wallet_sql, k|
             syncing = false
             unless wallets.empty?
-            wallets.each { |wallet, k|
+            wallets.each { |k, wallet|
                 if wallet["path"].include? wallet_sql[:primaryAddress]
                     if wallet.key?(:current_sync_height)
                         syncing = true
@@ -38,7 +38,7 @@ module ::Jobs
                 end
             }
              end
-            unless syncing
+            if (!syncing && wallet_sql.shouldSync)
                 root_directory ||= File.join(Rails.root, "public", "backups")
 
                 base_directory = File.join(root_directory, "wallets")
