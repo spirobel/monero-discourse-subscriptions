@@ -24,26 +24,38 @@ stagenet
       </h2>
 
       <hr>
+        {{#unless noPlans}}
+
       <p>
   {{i18n "monero_discourse_subscriptions.plans.select"}}
 </p>
+      {{/unless}}
+
 <div class="monero-subscribe-buttons">
-    {{#each model.monero_plans as |plan|}}
+  {{#unless noPlans}}
+    {{#each active_plans as |plan|}}
 
 
 {{monero-plan-button plan=plan selectedPlanId=selectedPlanId planClick=(action 'planClick')}}
 
   {{/each}}
+      {{/unless}}
+  {{#if noPlans}}
+  <p>{{i18n "monero_discourse_subscriptions.subscribe.no_plans"}}</p>
+
+  {{/if}}
   </div>
       <hr>
     {{#unless isLoggedIn}}
       {{monero-login-required}}
     {{/unless}}
+  {{#unless noPlans}}
 
     {{#if isLoggedIn}}
         subscribe-card cardElement=cardElement
         {{selectedPlanId}}
       {{/if}}
+    {{/unless}}
 
   </div>
 </div>

@@ -13,6 +13,7 @@ en:
         prolong: Prolong!
         subscribed_until: "You are subscribed until:"
         no_products: There are currently no products available.
+        no_plans: There are currently no plans available for this product.
         product_not_active: This product is currently not available.
       navigation:
         subscribe: Subscribe with Monero
