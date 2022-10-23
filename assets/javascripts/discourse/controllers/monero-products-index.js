@@ -10,7 +10,11 @@ export default Controller.extend({
     return User.current();
   },
   @discourseComputed("model")
-  noProducts(model) {
-    return isEmpty(model);
+  active_products(model) {
+    return model.filter(p=>p.active);
+  },
+  @discourseComputed("active_products")
+  noProducts(active_products) {
+    return isEmpty(active_products);
   },
 });
