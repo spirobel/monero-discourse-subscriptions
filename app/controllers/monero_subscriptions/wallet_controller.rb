@@ -67,7 +67,30 @@ module MoneroDiscourseSubscriptions
       end
       def update
         wallet = MoneroWallet.find_by_id(wallet_update_params[:id])
-        render_json_dump wallet.update(wallet_update_params)
+        update = wallet.update(wallet_update_params)
+
+
+        root_directory ||= File.join(Rails.root, "public", "backups")
+
+        base_directory = File.join(root_directory, "wallets")
+        wallet_base_path = base_directory +"/"+ wallet[:primaryAddress]
+
+        uri = URI.parse("http://localhost:3001/v1/wallets/shutdown")
+        request = Net::HTTP::Post.new(uri)
+        request.content_type = "application/json"
+        request["Accept"] = "application/json"
+        request.body = JSON.dump([
+          wallet_base_path
+        ])
+
+        req_options = {
+          use_ssl: uri.scheme == "https",
+        }
+
+        response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+          http.request(request)
+        end
+        render_json_dump update
       end
       def delete
         params.require(:id)
