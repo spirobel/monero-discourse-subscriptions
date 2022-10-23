@@ -71,6 +71,27 @@ module ::Jobs
                   http.request(request)
                 end
                 puts response.body
+                if response.body.include? "Wallet does not exist at path"
+                  uri = URI.parse("http://localhost:3001/v1/wallet/initialize")
+                  request = Net::HTTP::Post.new(uri)
+                  request.content_type = "application/json"
+                  request["Accept"] = "application/json"
+                  request.body = JSON.dump({
+                    "path" => wallet_base_path,
+                    "networkType" => network,
+                    "primaryAddress" => wallet_sql[:primaryAddress],
+                    "privateViewKey" => wallet_sql[:privateViewKey],
+                    "restoreHeight" => wallet_sql[:restoreHeight].to_i
+                  })
+                  
+                  req_options = {
+                    use_ssl: uri.scheme == "https",
+                  }
+                  
+                  response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+                    http.request(request)
+                  end
+                end
             end
         }
       end
