@@ -61,7 +61,11 @@ module MoneroDiscourseSubscriptions
           render_json_dump MoneroWallet.create(wallet_create_params)
         else
           error = JSON.parse(response.body)
-          render_json_error error["message"]
+          if response.body.include? "Wallet already exists:"
+            render_json_dump MoneroWallet.create(wallet_create_params)
+          else
+            render_json_error error["message"]
+          end
         end
 
       end
@@ -98,11 +102,28 @@ module MoneroDiscourseSubscriptions
         if MoneroProduct.where(monero_wallet_id: wallet.id).exists?
           render_json_error "There is a product that uses this wallet. Delete it first!"
         else
+          wallet.update(shouldSync: false)
           root_directory ||= File.join(Rails.root, "public", "backups")
 
           base_directory = File.join(root_directory, "wallets")
           wallet_base_path = base_directory +"/"+ wallet[:primaryAddress]
-          FileUtils.rm_f([wallet_base_path, wallet_base_path + ".address.txt", wallet_base_path + ".keys"])
+
+
+          uri = URI.parse("http://localhost:3001/v1/wallets/shutdown")
+          request = Net::HTTP::Post.new(uri)
+          request.content_type = "application/json"
+          request["Accept"] = "application/json"
+          request.body = JSON.dump([
+            wallet_base_path
+          ])
+  
+          req_options = {
+            use_ssl: uri.scheme == "https",
+          }
+  
+          response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+            http.request(request)
+          end
           render_json_dump wallet.destroy
         end
       end
