@@ -38,6 +38,12 @@
     }
   }
 }
+.positive-message{
+  color: var(--success);
+}
+.error-message{
+  color: red;
+}
 .wallet-stagenet {
   color: orange;
 }

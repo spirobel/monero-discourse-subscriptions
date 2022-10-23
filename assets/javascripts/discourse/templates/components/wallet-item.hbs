@@ -7,6 +7,14 @@
 <p class="wallet-restoreHeight">
   restore height: {{wallet.restoreHeight}}
 </p>
+  {{#if ws.height}}
+   <span class="positive-message"> current sync height: {{ws.height}} 
+</span>
+{{/if}}
+  {{#if ws.endHeight}}
+   <span class="positive-message"> current daemon sync height: {{ws.endHeight}} 
+</span>
+{{/if}}
   {{#if wallet.stagenet}}
 
 <p class="wallet-stagenet">
@@ -22,7 +30,23 @@ stagenet
        class="btn no-text btn-icon"
      }}
 </p>
+<p>
+  {{#if ws.message}}
+   <span class="positive-message">&#x2713; {{ws.message}} 
+</span>
+{{/if}}
 
+  {{#if ws.percentDone}}
+   <span class="positive-message"> {{percentDone}} %
+</span>
+{{/if}}
+
+  {{#if ws.error_message}}
+   <span class="error-message"> {{ws.error_message}}
+</span>
+{{/if}}
+
+</p>
 <div class="wallet-align-buttons">
      {{d-button
        action=(route-action "destroyWallet")
