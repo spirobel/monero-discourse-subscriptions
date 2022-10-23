@@ -36,9 +36,15 @@ stagenet
   {{/each}}
   </div>
       <hr>
+    {{#unless isLoggedIn}}
+      {{monero-login-required}}
+    {{/unless}}
 
-      subscribe-card cardElement=cardElement
-      {{selectedPlanId}}
+    {{#if isLoggedIn}}
+        subscribe-card cardElement=cardElement
+        {{selectedPlanId}}
+      {{/if}}
+
   </div>
 </div>
 {{/if}}
