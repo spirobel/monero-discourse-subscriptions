@@ -2,9 +2,14 @@
   {{monero-login-required}}
 {{/unless}}
 
-
+{{#unless noProducts}}
 <div class="monero-products-list">
     {{#each model as |product|}}
     {{monero-product-item product=product isLoggedIn=isLoggedIn}}
   {{/each}}
   </div>
+  {{/unless}}
+  {{#if noProducts}}
+  <p>{{i18n "monero_discourse_subscriptions.subscribe.no_products"}}</p>
+
+  {{/if}}

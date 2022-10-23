@@ -12,6 +12,7 @@ en:
         title: Subscribe
         prolong: Prolong!
         subscribed_until: "You are subscribed until:"
+        no_products: There are currently no products available.
       navigation:
         subscribe: Subscribe with Monero
       title: Monero Subscriptions
