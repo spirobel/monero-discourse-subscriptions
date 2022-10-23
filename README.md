@@ -69,3 +69,6 @@ hooks:
           - git clone https://github.com/discourse/docker_manager.git
           - git clone https://github.com/spirobel/monero-discourse-subscriptions
 ```
+
+## tips
+It is advised to turn off syncing of the wallets during Discourse updates (to make sure the current sync state is saved.)

@@ -33,6 +33,16 @@ AdminWallet.reopenClass({
       data,
     });
   },
+  toggleSync(id) {
+    const data = {
+        toggleSync: true
+    };
+
+    return ajax(`/monero/wallets/${id}`, {
+      method: "patch",
+      data,
+    });
+  },
 });
 
 AdminWallet.reopenClass({

@@ -45,6 +45,14 @@ export default Route.extend({
                   },
                 }
               });
+        },
+        toggleSync(id){
+          AdminWallet.toggleSync(id).then(() => {
+            this.refresh();
+          })
+          .catch((data) =>
+            bootbox.alert(data.jqXHR.responseJSON.errors.join("\n"))
+          );
         }
     }
 });

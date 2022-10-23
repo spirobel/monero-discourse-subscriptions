@@ -71,8 +71,13 @@ module MoneroDiscourseSubscriptions
       end
       def update
         wallet = MoneroWallet.find_by_id(wallet_update_params[:id])
+        update = nil
+        if wallet_update_params[:toggleSync]
+          wallet.toggle(:shouldSync)
+          wallet.save
+        else
         update = wallet.update(wallet_update_params)
-
+        end
 
         root_directory ||= File.join(Rails.root, "public", "backups")
 
@@ -139,7 +144,7 @@ module MoneroDiscourseSubscriptions
       end
 
       def wallet_update_params
-        params.permit(:serverUri, :id)
+        params.permit(:serverUri, :id, :toggleSync)
       end
   
     end

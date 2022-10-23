@@ -21,6 +21,16 @@
 stagenet
 </p>
   {{/if}}
+  <p class="wallet-shouldSync">
+    should sync? 
+  {{wallet.shouldSync}}
+       {{d-button
+       action=(route-action "toggleSync")
+       actionParam=wallet.id
+       icon="far-edit"
+       class="btn no-text btn-icon"
+     }}
+</p>
 <p class="wallet-serverUri">
   {{wallet.serverUri}}
        {{d-button
