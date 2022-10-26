@@ -31,8 +31,15 @@ module MoneroDiscourseSubscriptions
         end
         def index
             page = params[:page].to_i || 0
-            subscriptions = MoneroSubscription.order(created_at: :desc).limit(10).offset(page * 10)
-            render :json => subscriptions.to_json( :include => [:buyer, :recipient],:methods => [:buyer_name, :recipient_name, :product_name, :duration] )
+            if params[:recipient] && !params[:recipient].empty?
+                recipient = User.find_by_username(params[:recipient])
+                subscriptions = MoneroSubscription.where(recipient: recipient).order(created_at: :desc).limit(10).offset(page * 10)
+                render :json => subscriptions.to_json( :include => [:buyer, :recipient],:methods => [:buyer_name, :recipient_name, :product_name, :duration] )
+            else
+
+                subscriptions = MoneroSubscription.order(created_at: :desc).limit(10).offset(page * 10)
+                render :json => subscriptions.to_json( :include => [:buyer, :recipient],:methods => [:buyer_name, :recipient_name, :product_name, :duration] )
+            end
         end
         
         def delete
