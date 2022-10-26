@@ -60,6 +60,8 @@ en:
             yearly: Yearly
             lifetime: Lifetime
         subscriptions:
+          backward: backward
+          forward: forward
           title: Subscriptions
           select_begin: Select begin date
           select_end: Select end date

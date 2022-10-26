@@ -5,8 +5,8 @@ import I18n from "I18n";
 import bootbox from "bootbox";
 
 export default Route.extend({
-  model() {
-    return AdminMoneroSubscription.findAll();
+  model(params) {
+    return AdminMoneroSubscription.findAll(params);
   },
   actions:{
     reloadModel() {

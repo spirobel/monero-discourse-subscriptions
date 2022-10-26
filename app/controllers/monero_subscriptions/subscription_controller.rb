@@ -31,7 +31,7 @@ module MoneroDiscourseSubscriptions
         end
         def index
             page = params[:page].to_i || 0
-            subscriptions = MoneroSubscription.order(created_at: :desc).limit(1).offset(page * 1)
+            subscriptions = MoneroSubscription.order(created_at: :desc).limit(10).offset(page * 10)
             render :json => subscriptions.to_json( :include => [:buyer, :recipient],:methods => [:buyer_name, :recipient_name, :product_name, :duration] )
         end
         

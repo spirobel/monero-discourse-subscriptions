@@ -35,8 +35,10 @@ AdminMoneroSubscription.reopenClass({
 });
 
 AdminMoneroSubscription.reopenClass({
-  findAll() {
-    return ajax("/monero/subscriptions", { method: "get" }).then((result) => {
+  findAll(params) {
+    let page = params.page || "0";
+
+    return ajax("/monero/subscriptions?page="+page, { method: "get" }).then((result) => {
       if (result === null) {
         return { unconfigured: true };
       }
