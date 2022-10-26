@@ -61,6 +61,8 @@ en:
             lifetime: Lifetime
         subscriptions:
           title: Subscriptions
+          select_begin: Select begin date
+          select_en: Select end date
           select_buyer: Select buyer
           buyer: Buyer
           select_recipient: Select recipient
@@ -75,6 +77,9 @@ en:
             create_subscription:
               save_action: Create Subscription!
               modal_title: Create New Subscription
+            edit_subscription:
+              save_action: Edit Subscription!
+              modal_title: Edit Subscription Dates
         wallets:
           wallet_help: Before you can start creating products, you need to open at least one wallet.
           title: Wallets
