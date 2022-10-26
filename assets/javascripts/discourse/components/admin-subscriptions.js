@@ -19,16 +19,30 @@ export default Component.extend({
     actions: {
         backward(){
             this.router.transitionTo({queryParams: {
+                recipient: this.recipient,
                 page: Number(this.page)-1
             }});
             this.reloadModel();
         },
         forward(){
             this.router.transitionTo({queryParams: {
+                recipient: this.recipient,
                 page: Number(this.page)+1
             }});
             this.reloadModel();
-        }
+        },
+        onChangeRecipient(usernames) {
+            let username = usernames.get("firstObject");
+            this.set("recipient", username);
+           if(username){
+                this.router.transitionTo({queryParams: {
+                    recipient: username,
+                    page: this.page
+                }});
+                this.reloadModel();
+            }
+
+          }
     },
     @discourseComputed("page")
     pageZero(page){

@@ -8,7 +8,15 @@
     }}
 
   </p>
-
+     {{i18n "monero_discourse_subscriptions.admin.subscriptions.select_recipient"}}
+                 {{user-chooser
+        value=recipient
+        onChange=(action "onChangeRecipient")
+        options=(hash
+          maximum=1
+          excludeCurrentUser=false
+        )
+      }}
 <table class="table monero-discourse-subscriptions-table">
   <thead>
     <th>{{i18n "monero_discourse_subscriptions.admin.subscriptions.buyer"}}</th>
@@ -61,3 +69,4 @@
             class="btn"
           }}
           {{/unless}}
+   

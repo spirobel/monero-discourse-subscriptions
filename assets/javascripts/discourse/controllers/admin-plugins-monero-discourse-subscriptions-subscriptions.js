@@ -2,6 +2,7 @@ import Controller from "@ember/controller";
 
 
 export default Controller.extend({
-  queryParams: ['page'],
+  queryParams: ['page','recipient'],
   page: null,
+  recipient: null
 });
