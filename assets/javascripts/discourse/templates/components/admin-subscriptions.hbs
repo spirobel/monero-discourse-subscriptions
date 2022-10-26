@@ -10,4 +10,41 @@
   </p>
 
 subscriptions
+<table class="table monero-discourse-subscriptions-table">
+  <thead>
+    <th>{{i18n "monero_discourse_subscriptions.admin.subscriptions.buyer"}}</th>
+    <th>{{i18n "monero_discourse_subscriptions.admin.subscriptions.recipient"}}</th>
+    <th>{{i18n "monero_discourse_subscriptions.admin.subscriptions.product_name"}}</th>
+    <th>{{i18n "monero_discourse_subscriptions.admin.subscriptions.duration"}}</th>
+    <th>{{i18n "monero_discourse_subscriptions.admin.subscriptions.begin_date"}}</th>
+    <th>{{i18n "monero_discourse_subscriptions.admin.subscriptions.end_date"}}</th>
+
+
+    <th></th>
+  </thead>
+  <tbody>
+        {{#each model as |subscription|}}
+      <tr>
+        <td>{{subscription.buyer_name}}</td>
+        <td>{{subscription.recipient_name}}</td>
+        <td>{{subscription.product_name}}</td>
+        <td>{{display-duration duration=subscription.duration}}</td>
+        <td>{{subscription.begin_date}}</td>
+        <td>{{subscription.end}}</td>
+        <td class="td-right">
+          {{d-button
+            action=(route-action "editSubscription" subscription)
+            icon="far-edit"
+            class="btn no-text btn-icon"
+          }}
+          {{d-button
+            action=(route-action "destroySubscription" subscription.id)
+            icon="trash-alt"
+            class="btn-danger btn no-text btn-icon"
+          }}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
 {{page}}
