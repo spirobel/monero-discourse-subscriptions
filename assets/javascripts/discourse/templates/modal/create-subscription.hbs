@@ -1,0 +1,66 @@
+{{#d-modal-body  title=title}}
+
+    <p>
+      <label for="buyer">
+        {{i18n "monero_discourse_subscriptions.admin.subscriptions.select_buyer"}}
+      </label>
+
+            {{user-chooser
+        value=model.subscription.buyer
+        onChange=(action "onChangeBuyer")
+        options=(hash
+          maximum=1
+          excludeCurrentUser=false
+        )
+      }}
+
+    </p>
+    <p>
+      <label for="recipient">
+        {{i18n "monero_discourse_subscriptions.admin.subscriptions.select_recipient"}}
+      </label>
+            {{user-chooser
+        value=model.subscription.recipient
+        onChange=(action "onChangeRecipient")
+        options=(hash
+          maximum=1
+          excludeCurrentUser=false
+        )
+      }}
+    </p>
+
+
+    <p>
+      <label>
+        {{i18n "monero_discourse_subscriptions.admin.subscriptions.select_plan"}}
+      </label>
+          {{combo-box
+      nameProperty="name"
+      valueProperty="id"
+      content=model.products
+      value=model.product_id
+      onChange=(action (mut model.product_id))
+    }}
+              {{combo-box
+      nameProperty="durationDisplay"
+      valueProperty="id"
+      content=moneroPlans
+      value=model.subscription.monero_plan_id
+      onChange=(action (mut model.subscription.monero_plan_id))
+    }}
+    </p>
+ 
+
+
+{{/d-modal-body}}
+
+<div class="modal-footer">
+  {{d-button action="createNewSubscription" class="btn-primary" label="monero_discourse_subscriptions.admin.subscriptions.operations.create_subscription.save_action"}}
+  {{d-button
+    action=(action "closeModal")
+    label="cancel"
+    title="cancel"
+    icon="times"
+    class="btn btn-icon"
+  }}
+</div>

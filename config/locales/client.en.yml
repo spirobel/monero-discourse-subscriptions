@@ -61,6 +61,14 @@ en:
             lifetime: Lifetime
         subscriptions:
           title: Subscriptions
+          select_buyer: Select buyer
+          select_recipient: Select recipient
+          select_plan: Select plan of product
+          operations:
+            new: New Subscription
+            create_subscription:
+              save_action: Create Subscription!
+              modal_title: Create New Subscription
         wallets:
           wallet_help: Before you can start creating products, you need to open at least one wallet.
           title: Wallets
