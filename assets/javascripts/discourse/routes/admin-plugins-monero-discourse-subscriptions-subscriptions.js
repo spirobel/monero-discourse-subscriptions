@@ -12,7 +12,7 @@ export default Route.extend({
     reloadModel() {
       this.refresh();
     },
-    destroyProduct(id){
+    destroySubscription(id){
       bootbox.confirm(
           I18n.t("monero_discourse_subscriptions.admin.products.operations.destroy.confirm"),
           I18n.t("no_value"),
