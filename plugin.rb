@@ -28,9 +28,13 @@ after_initialize do
 
   require_relative "app/controllers/monero_subscriptions/wallet_controller.rb"
   require_relative "app/controllers/monero_subscriptions/product_controller.rb"
+  require_relative "app/controllers/monero_subscriptions/subscription_controller.rb"
+
   require_relative "app/models/monero_subscriptions/monero_plan.rb"
   require_relative "app/models/monero_subscriptions/monero_product.rb"
   require_relative "app/models/monero_subscriptions/monero_wallet.rb"
+  require_relative "app/models/monero_subscriptions/monero_subscription.rb"
+
   require_relative "app/jobs/scheduled/make_sure_wallets_are_synced.rb"
 
   MoneroDiscourseSubscriptions::Engine.routes.draw do
@@ -46,6 +50,12 @@ after_initialize do
     patch '/products/:id' => 'product#update', constraints: AdminConstraint.new
     patch '/products_plans/' => 'product#update_plans', constraints: AdminConstraint.new
     delete '/products/:id' => 'product#delete', constraints: AdminConstraint.new
+
+    get '/subscriptions' => 'subscription#index', constraints: AdminConstraint.new
+    get '/subscriptions/:id' => 'subscription#show', constraints: AdminConstraint.new
+    post '/subscriptions' => 'subscription#create', constraints: AdminConstraint.new
+    patch '/subscriptions/:id' => 'subscription#update', constraints: AdminConstraint.new
+    delete '/subscriptions/:id' => 'subscription#delete', constraints: AdminConstraint.new
   end
 
   add_admin_route 'monero_discourse_subscriptions.admin_navigation', 'monero-discourse-subscriptions.products'
@@ -53,6 +63,8 @@ after_initialize do
     get '/admin/plugins/monero-discourse-subscriptions' => 'admin/plugins#index', constraints: AdminConstraint.new
     get '/admin/plugins/monero-discourse-subscriptions/products' => 'admin/plugins#index', constraints: AdminConstraint.new
     get '/admin/plugins/monero-discourse-subscriptions/wallets' => 'admin/plugins#index', constraints: AdminConstraint.new
+    get '/admin/plugins/monero-discourse-subscriptions/subscriptions' => 'admin/plugins#index', constraints: AdminConstraint.new
+
     mount ::MoneroDiscourseSubscriptions::Engine, at: "/monero"
 
   
