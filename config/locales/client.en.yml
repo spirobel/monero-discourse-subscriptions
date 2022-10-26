@@ -62,8 +62,14 @@ en:
         subscriptions:
           title: Subscriptions
           select_buyer: Select buyer
+          buyer: Buyer
           select_recipient: Select recipient
+          recipient: Recipient
           select_plan: Select plan of product
+          product_name: Product name
+          duration: Duration
+          end_date: End date
+          begin_date: Begin date
           operations:
             new: New Subscription
             create_subscription:
