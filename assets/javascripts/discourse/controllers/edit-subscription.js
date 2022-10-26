@@ -8,10 +8,9 @@ export default Controller.extend(ModalFunctionality, {
 
 
     editSubscription(){
-      console.log(this, this.model, this.begin_date)
         this.get('model.editSubscription')({ id: this.model.subscription.id,
-          begin_date: this.begin_date.unix(),
-          end: this.end.unix(),
+          begin_date: this.model.begin_date.unix(),
+          end: this.model.end.unix(),
 
           });
         this.send('closeModal');

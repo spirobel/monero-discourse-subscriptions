@@ -5,8 +5,8 @@
         {{i18n "monero_discourse_subscriptions.admin.subscriptions.select_begin"}}
       </label>
 
-      {{date-time-input date=begin_date
-       onChange=(action (mut begin_date))}}
+      {{date-time-input date=model.begin_date
+       onChange=(action (mut model.begin_date))}}
 
 
     </p>
@@ -14,8 +14,8 @@
       <label for="select_end">
         {{i18n "monero_discourse_subscriptions.admin.subscriptions.select_end"}}
       </label>
-      {{date-time-input date=end
-      onChange=(action (mut end))}}
+      {{date-time-input date=model.end
+      onChange=(action (mut model.end))}}
 
     </p>
 
