@@ -11,5 +11,11 @@ class MoneroSubscription < ActiveRecord::Base
   def recipient_name
     return recipient.username
   end
+  def product_name
+    return monero_plan.monero_product.name
+  end
+  def duration
+    return monero_plan.duration
+  end
 end
 
