@@ -1,0 +1,34 @@
+{{#d-modal-body  title=title}}
+
+    <p>
+      <label for="select_begin">
+        {{i18n "monero_discourse_subscriptions.admin.subscriptions.select_begin"}}
+      </label>
+
+      {{date-time-input date=begin_date
+       onChange=(action (mut begin_date))}}
+
+
+    </p>
+    <p>
+      <label for="select_end">
+        {{i18n "monero_discourse_subscriptions.admin.subscriptions.select_end"}}
+      </label>
+      {{date-time-input date=end
+      onChange=(action (mut end))}}
+
+    </p>
+
+
+{{/d-modal-body}}
+
+<div class="modal-footer">
+  {{d-button action="editSubscription" class="btn-primary" label="monero_discourse_subscriptions.admin.subscriptions.operations.create_subscription.edit_action"}}
+  {{d-button
+    action=(action "closeModal")
+    label="cancel"
+    title="cancel"
+    icon="times"
+    class="btn btn-icon"
+  }}
+</div>
