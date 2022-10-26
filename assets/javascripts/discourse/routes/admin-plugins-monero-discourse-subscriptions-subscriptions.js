@@ -31,10 +31,11 @@ export default Route.extend({
           }
         );
   },
-  editSubscription(subscription, products){
+  editSubscription(subscription){
       showModal('edit-subscription', {
           model: {
-            products,
+            begin_date: moment(subscription.begin_date),
+            end: moment(subscription.end),
             subscription:Object.assign({}, subscription)
             ,
             editSubscription: (subscriptionParams) => {

@@ -22,9 +22,8 @@ AdminMoneroSubscription.reopenClass({
 
   update(subscriptionParams) {
     const data = {
-        buyer: subscriptionParams.buyer,
-        recipient: subscriptionParams.recipient,
-        monero_plan_id: subscriptionParams.monero_plan_id
+        begin_date: subscriptionParams.begin_date,
+        end: subscriptionParams.end,
     };
 
     return ajax(`/monero/subscriptions/${subscriptionParams.id}`, {
