@@ -33,14 +33,14 @@ export default Component.extend({
         },
         onChangeRecipient(usernames) {
             let username = usernames.get("firstObject");
-            this.set("recipient", username);
-           if(username){
+           if(username || (this.recipient && username === undefined)){
                 this.router.transitionTo({queryParams: {
                     recipient: username,
                     page: this.page
                 }});
                 this.reloadModel();
             }
+            this.set("recipient", username);
 
           }
     },
