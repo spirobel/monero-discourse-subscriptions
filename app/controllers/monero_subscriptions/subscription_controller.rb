@@ -19,7 +19,7 @@ module MoneroDiscourseSubscriptions
             currency = monero_plan[:currency]
             amount = monero_plan[:amount]
 
-            last_ending = monero_plan.monero_product.monero_subscriptions.where(recipient: recipient).order(end: :desc).first
+            last_ending = monero_plan.monero_product.monero_subscriptions.where(recipient: recipient, ended: false).order(end: :desc).first
             begin_date = DateTime.current
             unless last_ending.nil?
                 begin_date = last_ending.end - 10.seconds
