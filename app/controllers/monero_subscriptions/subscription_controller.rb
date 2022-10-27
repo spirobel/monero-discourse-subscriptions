@@ -18,8 +18,13 @@ module MoneroDiscourseSubscriptions
             monero_plan = MoneroPlan.find_by_id(params[:monero_plan_id])
             currency = monero_plan[:currency]
             amount = monero_plan[:amount]
+
+            last_ending = monero_plan.monero_product.monero_subscriptions.where(recipient: recipient).order(end: :desc).first
             begin_date = DateTime.current
-            end_date = DateTime.current + monero_plan[:duration].seconds
+            unless last_ending.nil?
+                begin_date = last_ending.end - 10.seconds
+            end
+            end_date = begin_date + monero_plan[:duration].seconds
             if monero_plan[:duration] == 99999999
                 end_date = DateTime.current + 100.years
             end
