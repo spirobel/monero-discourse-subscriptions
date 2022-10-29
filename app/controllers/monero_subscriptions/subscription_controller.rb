@@ -74,7 +74,7 @@ module MoneroDiscourseSubscriptions
 
                   if (DateTime.current >= s[:begin_date] && # currently running  
                        DateTime.current <= s[:end] && 
-                        s[:monero_plan][:monero_product][:group == group]) # same group
+                        s[:monero_plan][:monero_product][:group] == group) # same group
 
                     user_currently_subscribed = true
                   end
