@@ -54,6 +54,10 @@ module MoneroDiscourseSubscriptions
         end
           
         def update
+            if Time.at(params[:begin_date].to_i) >= Time.at(params[:end].to_i)
+                render_json_error "please make sure the subscription ends after it begins"
+                return
+            end
             subscription = MoneroSubscription.find_by_id(params[:id])
             up = subscription.update(begin_date: Time.at(params[:begin_date].to_i),
                                                             end: Time.at(params[:end].to_i))
