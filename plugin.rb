@@ -36,6 +36,7 @@ after_initialize do
   require_relative "app/models/monero_subscriptions/monero_subscription.rb"
 
   require_relative "app/jobs/scheduled/make_sure_wallets_are_synced.rb"
+  require_relative "app/jobs/scheduled/make_sure_subscribers_are_in_groups.rb"
 
   MoneroDiscourseSubscriptions::Engine.routes.draw do
     get '/wallets' => 'wallet#index', constraints: AdminConstraint.new

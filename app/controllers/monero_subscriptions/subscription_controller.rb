@@ -55,8 +55,35 @@ module MoneroDiscourseSubscriptions
           
         def update
             subscription = MoneroSubscription.find_by_id(params[:id])
-            render_json_dump subscription.update(begin_date: Time.at(params[:begin_date].to_i),
+            up = subscription.update(begin_date: Time.at(params[:begin_date].to_i),
                                                             end: Time.at(params[:end].to_i))
+            if up # the following makes sure the user is removed from the group 
+                  # in case begin_date is moved to the future and the user is currently not subscribed
+                group = subscription.monero_plan.monero_product.group
+                user = subscription.recipient
+
+                us = MoneroSubscription.where(ended: false,
+                     recipient: subscription[:recipient], 
+                    ).to_a
+                user_currently_subscribed = false
+                us.each { |s, k|
+
+                  if (DateTime.current >= s[:begin_date] && # currently running  
+                       DateTime.current <= s[:end] && 
+                        s[:monero_plan][:monero_product][:group == group]) # same group
+
+                    user_currently_subscribed = true
+                  end
+                }
+                if (DateTime.current < subscription[:begin_date] && # not yet begun
+                    !user_currently_subscribed)
+
+                    group.remove(user)
+                end
+            end 
+
+            # the make_sure_subscribers_are_in_groups will take care of adding the user to the group
+            render_json_dump up                                                
         end
 
     end
