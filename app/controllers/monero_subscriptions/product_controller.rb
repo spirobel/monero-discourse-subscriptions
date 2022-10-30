@@ -20,6 +20,11 @@ module MoneroDiscourseSubscriptions
 
       def create
           group = Group.find_by_id(create_product_params[:group])
+          other_product = MoneroProduct.where(group: group).first
+          if other_product
+            render_json_error 'The product called "'+ other_product[:name] + '" already manages this group. Please select a different one!'
+            return
+          end
           monero_wallet = MoneroWallet.find_by_id(create_product_params[:monero_wallet])
           product = MoneroProduct.create(group: group,
             monero_wallet: monero_wallet,
@@ -54,6 +59,11 @@ module MoneroDiscourseSubscriptions
       end
       def update
         group = Group.find_by_id(update_product_params[:group])
+        other_product = MoneroProduct.where(group: group).first
+        if other_product
+          render_json_error 'The product called "'+ other_product[:name] + '" already manages this group. Please select a different one!'
+          return
+        end
         monero_wallet = MoneroWallet.find_by_id(update_product_params[:monero_wallet])
         product = MoneroProduct.find_by_id(update_product_params[:id])
         render_json_dump product.update(group: group,
