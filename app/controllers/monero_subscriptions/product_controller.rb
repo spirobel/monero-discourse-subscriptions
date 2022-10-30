@@ -67,6 +67,11 @@ module MoneroDiscourseSubscriptions
       def delete
         params.require(:id)
         product = MoneroProduct.find_by_id(params[:id])
+        subscriptions = product.monero_subscriptions.empty?
+        unless subscriptions
+          render_json_error "This product can't be deleted because it has subscriptions from users. Make it inactive instead of deleting it."
+          return
+        end
         render_json_dump product.destroy
       end
       
