@@ -12,6 +12,7 @@
 </div>
 
 {{/if}}
+{{#unless currentlyNoSubscriptions}}
 
 <table class="table monero-discourse-subscriptions-table">
   <thead>
@@ -45,3 +46,4 @@
     {{/each}}
   </tbody>
 </table>
+{{/unless}}
