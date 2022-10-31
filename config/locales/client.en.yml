@@ -17,6 +17,7 @@ en:
         product_not_active: This product is currently not available.
       navigation:
         subscribe: Subscribe with Monero
+        monero_subscriptions: Monero Subscriptions
       title: Monero Subscriptions
       admin_navigation: Monero Subscriptions
       admin:

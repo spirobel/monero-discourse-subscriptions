@@ -16,7 +16,7 @@ export default {
         api.addQuickAccessProfileItem({
           icon: "gift",
           href: `/u/${user.username}/monero/subscriptions`,
-          content: "Monero Subscriptions",
+          content: I18n.t("monero_discourse_subscriptions.navigation.monero_subscriptions"),
         });
       }
     });
