@@ -20,7 +20,6 @@ module MoneroDiscourseSubscriptions
       def show
         params.require(:id)
         product = MoneroProduct.includes(:monero_plans).find_by_id(params[:id])
-        product.subscribed= false
         last_ending = product.monero_subscriptions.where(recipient: current_user, ended: false).order(end: :desc).first
         product.subscribed= false
         if last_ending
