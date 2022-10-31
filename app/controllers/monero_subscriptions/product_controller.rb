@@ -72,7 +72,7 @@ module MoneroDiscourseSubscriptions
       def update
         group = Group.find_by_id(update_product_params[:group])
         other_product = MoneroProduct.where(group: group).first
-        if other_product
+        if (other_product && other_product[:id] != update_product_params[:id].to_i)
           render_json_error 'The product called "'+ other_product[:name] + '" already manages this group. Please select a different one!'
           return
         end
