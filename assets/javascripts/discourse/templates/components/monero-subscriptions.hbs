@@ -1,0 +1,47 @@
+
+{{#if currentlyNoSubscriptions}}
+<div>
+  <span>
+  {{i18n "monero_discourse_subscriptions.navigation.currently_no_subs"}}
+  </span>
+
+  {{#link-to "monero-products" class="btn btn-primary"}}
+    {{d-icon "gift"}}
+    {{i18n "monero_discourse_subscriptions.navigation.subscribe"}}
+  {{/link-to}}
+</div>
+
+{{/if}}
+
+<table class="table monero-discourse-subscriptions-table">
+  <thead>
+    <th>{{i18n "monero_discourse_subscriptions.admin.subscriptions.product_name"}}</th>
+    <th>{{i18n "monero_discourse_subscriptions.admin.subscriptions.duration"}}</th>
+    <th>{{i18n "monero_discourse_subscriptions.admin.subscriptions.begin_date"}}</th>
+    <th>{{i18n "monero_discourse_subscriptions.admin.subscriptions.end_date"}}</th>
+
+
+    <th></th>
+  </thead>
+  <tbody>
+        {{#each subscriptions as |subscription|}}
+      <tr>
+        <td>{{subscription.product_name}}</td>
+        <td>{{display-duration duration=subscription.duration}}</td>
+        <td>{{monero-format-datetime subscription.begin_date}}</td>
+        <td>{{monero-format-datetime subscription.end }}</td>
+        <td class="td-right">
+
+          {{d-button
+            action=(action "showInvoice" subscription)
+            icon="far-credit-card"
+            class="btn no-text btn-icon"
+          }}
+          {{#if subscription.ended}}
+           <span class="ended">ended</span> 
+          {{/if}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

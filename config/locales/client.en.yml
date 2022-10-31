@@ -18,6 +18,7 @@ en:
       navigation:
         subscribe: Subscribe with Monero
         monero_subscriptions: Monero Subscriptions
+        currently_no_subs: "You currently have no subscriptions. Subscribe here:"
       title: Monero Subscriptions
       admin_navigation: Monero Subscriptions
       admin:
