@@ -5,7 +5,13 @@ module MoneroDiscourseSubscriptions
       def index
         products = MoneroProduct.includes(:monero_plans).to_a 
         products.each {|product|
+          last_ending = product.monero_subscriptions.where(recipient: current_user, ended: false).order(end: :desc).first
           product.subscribed= false
+          if last_ending
+            product.subscribed= true
+            product.end_date = last_ending.end
+          end
+
         } 
         render :json => products.to_json( :include => [:monero_plans], :methods => [:subscribed, :stagenet, :end_date] )
       end
@@ -15,7 +21,14 @@ module MoneroDiscourseSubscriptions
         params.require(:id)
         product = MoneroProduct.includes(:monero_plans).find_by_id(params[:id])
         product.subscribed= false
-        render :json => product.to_json( :include => [:monero_plans],:methods => [:subscribed, :stagenet]  )
+        last_ending = product.monero_subscriptions.where(recipient: current_user, ended: false).order(end: :desc).first
+        product.subscribed= false
+        if last_ending
+          product.subscribed= true
+          product.end_date = last_ending.end
+        end
+
+        render :json => product.to_json( :include => [:monero_plans],:methods => [:subscribed, :stagenet, :end_date]  )
       end
 
       def create
