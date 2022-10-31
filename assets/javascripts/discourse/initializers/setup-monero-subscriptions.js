@@ -10,14 +10,13 @@ export default {
           displayName: I18n.t("monero_discourse_subscriptions.navigation.subscribe"),
           href: "/monero/products",
         });
-      
 
       const user = api.getCurrentUser();
       if (user) {
         api.addQuickAccessProfileItem({
-          icon: "far-credit-card",
-          href: `/u/${user.username}/billing/subscriptions`,
-          content: "Billing",
+          icon: "gift",
+          href: `/u/${user.username}/monero/subscriptions`,
+          content: "Monero Subscriptions",
         });
       }
     });

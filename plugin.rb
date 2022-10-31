@@ -12,6 +12,7 @@ enabled_site_setting :monero_discourse_subscriptions_enabled
 
 register_asset "stylesheets/common/layout.scss"
 register_asset "stylesheets/mobile/main.scss"
+register_svg_icon "gift" if respond_to?(:register_svg_icon)
 
 
 
@@ -25,7 +26,6 @@ after_initialize do
       isolate_namespace MoneroDiscourseSubscriptions
     end
   end
-
   require_relative "app/controllers/monero_subscriptions/wallet_controller.rb"
   require_relative "app/controllers/monero_subscriptions/product_controller.rb"
   require_relative "app/controllers/monero_subscriptions/subscription_controller.rb"
