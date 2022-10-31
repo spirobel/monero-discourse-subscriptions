@@ -52,6 +52,7 @@ after_initialize do
     patch '/products_plans/' => 'product#update_plans', constraints: AdminConstraint.new
     delete '/products/:id' => 'product#delete', constraints: AdminConstraint.new
 
+    get '/mysubscriptions' => 'subscription#mysubscriptions'
     get '/subscriptions' => 'subscription#index', constraints: AdminConstraint.new
     get '/subscriptions/:id' => 'subscription#show', constraints: AdminConstraint.new
     post '/subscriptions' => 'subscription#create', constraints: AdminConstraint.new

@@ -1,5 +1,7 @@
 module MoneroDiscourseSubscriptions
     class SubscriptionController < ::ApplicationController
+        requires_login
+        
         def create
             if params[:buyer].nil?
                 render_json_error "please select a buyer" 
@@ -45,6 +47,11 @@ module MoneroDiscourseSubscriptions
                 subscriptions = MoneroSubscription.order(created_at: :desc).limit(10).offset(page * 10)
                 render :json => subscriptions.to_json( :include => [:buyer, :recipient],:methods => [:buyer_name, :recipient_name, :product_name, :duration] )
             end
+        end
+
+        def mysubscriptions
+            subscriptions = MoneroSubscription.where(recipient: current_user).order(created_at: :desc)
+            render :json => subscriptions.to_json( :include => [:buyer, :recipient],:methods => [:buyer_name, :recipient_name, :product_name, :duration] )
         end
         
         def delete
