@@ -26,9 +26,21 @@ stagenet
       <hr>
         {{#unless noPlans}}
 
-      <p>
-  {{i18n "monero_discourse_subscriptions.plans.select"}}
-</p>
+      
+              {{#if model.subscribed}}
+                    <p class="purchased">&#x2713; {{i18n "monero_discourse_subscriptions.subscribe.subscribed_until"}} {{monero-format-datetime model.end_date}}
+                    </p>
+                    <p>
+                      {{i18n "monero_discourse_subscriptions.plans.select_prolong"}}
+                    </p>
+              {{/if}}
+              {{#unless model.subscribed}}
+
+                <p>
+                  {{i18n "monero_discourse_subscriptions.plans.select"}}
+                </p>
+              {{/unless}}
+
       {{/unless}}
 
 <div class="monero-subscribe-buttons">
