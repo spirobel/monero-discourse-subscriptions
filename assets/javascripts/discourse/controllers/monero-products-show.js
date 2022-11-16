@@ -11,6 +11,16 @@ export default Controller.extend({
     error: null,
     actions: {
         planClick(planid){
+          let planid_in_plans = false;
+          let plans = this.model.monero_plans.filter(p=>p.active);
+          for (let plan of plans) {
+            if(plan.id === parseInt( planid, 10 )){
+              planid_in_plans = true;
+            }
+           }
+           if(!planid_in_plans){
+            planid = plans[0].id.toString();
+           }
             this.set('selectedPlanId', planid);
             let that = this;
 

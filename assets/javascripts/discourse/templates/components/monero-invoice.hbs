@@ -1,3 +1,5 @@
 {{#if invoice_error}}
 <div class="invoice-error">{{invoice_error}}</div>
 {{/if }}
+<img src="{{invoice.payment_uri_qrcode}}">
+{{invoice.monero_plan_id}}
