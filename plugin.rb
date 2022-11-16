@@ -29,6 +29,8 @@ after_initialize do
   require_relative "app/controllers/monero_subscriptions/wallet_controller.rb"
   require_relative "app/controllers/monero_subscriptions/product_controller.rb"
   require_relative "app/controllers/monero_subscriptions/subscription_controller.rb"
+  require_relative "app/controllers/monero_subscriptions/invoice_controller.rb"
+  require_relative "app/controllers/monero_subscriptions/admin_controller.rb"
 
   require_relative "app/models/monero_subscriptions/monero_plan.rb"
   require_relative "app/models/monero_subscriptions/monero_product.rb"
@@ -58,6 +60,10 @@ after_initialize do
     post '/subscriptions' => 'subscription#create', constraints: AdminConstraint.new
     patch '/subscriptions/:id' => 'subscription#update', constraints: AdminConstraint.new
     delete '/subscriptions/:id' => 'subscription#delete', constraints: AdminConstraint.new
+    
+    get '/myinvoice/:plan_id' => 'invoice#myinvoice'
+    post '/callbakc/:callback_secret' => 'invoice#callback'
+
   end
 
   add_admin_route 'monero_discourse_subscriptions.admin_navigation', 'monero-discourse-subscriptions.products'
