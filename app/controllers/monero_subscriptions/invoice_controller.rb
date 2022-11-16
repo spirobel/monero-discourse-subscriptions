@@ -60,6 +60,7 @@ module MoneroDiscourseSubscriptions
                      invoice[:id], invoice_fiat_amount, plan[:currency])
                     
                 invoice.update(address: invoice_request_json["address"],
+                    address_qrcode: invoice_request_json["address_qrcode"],
                     amount: invoice_request_json["amount"],
                     display_amount: invoice_request_json["display_amount"],
                     payment_uri: invoice_request_json["payment_uri"],
@@ -139,6 +140,7 @@ module MoneroDiscourseSubscriptions
                                     invoice[:id], missing_amount_converted, invoice.monero_plan[:currency])
 
                                 invoice.update(address: invoice_request_json["address"],
+                                    address_qrcode: invoice_request_json["address_qrcode"],
                                     amount: invoice_request_json["amount"],
                                     display_amount: invoice_request_json["display_amount"],
                                     payment_uri: invoice_request_json["payment_uri"],
