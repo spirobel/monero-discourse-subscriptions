@@ -120,13 +120,13 @@ module MoneroDiscourseSubscriptions
                         end
 
                         # 3. check if the amount is paid or not
-                        if (invoice_amount =< transaction_amount && !amount_old) # paid
+                        if (invoice_amount <= transaction_amount && !amount_old) # paid
                             paidCondition(invoice)
                         else 
                             converted_invoice_amount = convertAmount(invoice.monero_plan[:currency], invoice[:amount])
                             converted_transaction_amount = convertAmount(invoice.monero_plan[:currency], transaction[:amount])
                             
-                            if converted_invoice_amount =< converted_transaction_amount  # paid : we also accept if the amount is bigger or equal the invoice (in fiat) at the time the transaction was received.
+                            if converted_invoice_amount <= converted_transaction_amount  # paid : we also accept if the amount is bigger or equal the invoice (in fiat) at the time the transaction was received.
                                 paidCondition(invoice)
                             else # not_paid : calculate the missing amount, send pm and make new invoice 
                                 missing_amount = invoice_amount - transaction_amount
