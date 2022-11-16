@@ -37,8 +37,8 @@ module MoneroDiscourseSubscriptions
                 wallets = JSON.parse(response.body)
                 wallets.each { |k, wallet|
                     if wallet["path"].include? plan.monero_product.monero_wallet[:primaryAddress]
-                        if wallet.key?(:percentDone)
-                            synced = true if wallet[:percentDone] == 1
+                        if wallet.key?("percentDone")
+                            synced = true if wallet["percentDone"] == 1
                         end
                     end
                 }
@@ -59,7 +59,7 @@ module MoneroDiscourseSubscriptions
                 invoice_request_json = makeinvoicerequest(wallet_base_path,
                      invoice[:id], invoice_fiat_amount, plan[:currency])
                     
-                invoice = invoice.update(address: invoice_request_json["address"],
+                invoice.update(address: invoice_request_json["address"],
                     amount: invoice_request_json["amount"],
                     display_amount: invoice_request_json["display_amount"],
                     payment_uri: invoice_request_json["payment_uri"],
