@@ -64,8 +64,7 @@ stagenet
   {{#unless noPlans}}
 
     {{#if isLoggedIn}}
-        subscribe-card cardElement=cardElement
-        {{selectedPlanId}}
+        {{monero-invoice invoice=invoice selectedPlanId=selectedPlanId planClick=(action 'planClick')}}
       {{/if}}
     {{/unless}}
 
