@@ -43,7 +43,7 @@ module MoneroDiscourseSubscriptions
                     end
                 }
                 unless synced
-                    render_json_error "Please retry in a minute. We need to wait for sync to catch up. If this persists, please reach out via email! "
+                    render_json_error "Please retry in a minute. We need to wait for wallet sync to catch up. If this persists, please reach out via email! "
                     return
                 end
                 root_directory ||= File.join(Rails.root, "public", "backups")

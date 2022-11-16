@@ -7,13 +7,20 @@ import { isEmpty } from "@ember/utils";
 export default Controller.extend({
     queryParams: ['selectedPlanId'],
     selectedPlanId: null,
+    invoice: null,
+    error: null,
     actions: {
         planClick(planid){
             this.set('selectedPlanId', planid);
             let that = this;
-            MoneroInvoice.findMyInvoice(planid).then(data=>{
+
+            let found = function(data){
               that.set('invoice', data);
-          });
+            };
+            let notfound = function(error){
+              that.set('invoice_error', error.jqXHR.responseJSON.errors[0]);
+            };
+            MoneroInvoice.findMyInvoice(planid).then(found).catch(notfound);
         }
     },
     @discourseComputed()
