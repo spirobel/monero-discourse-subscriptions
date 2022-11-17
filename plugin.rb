@@ -11,7 +11,8 @@ enabled_site_setting :monero_discourse_subscriptions_enabled
 
 
 register_asset "stylesheets/common/layout.scss"
-register_asset "stylesheets/mobile/main.scss"
+register_asset "stylesheets/desktop/main.scss", :desktop
+register_asset "stylesheets/mobile/main.scss" , :mobile
 register_svg_icon "gift" if respond_to?(:register_svg_icon)
 
 

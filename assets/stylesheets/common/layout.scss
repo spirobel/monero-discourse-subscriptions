@@ -74,6 +74,7 @@
 }
 .invoice-container {
   display: flex;
+  flex-direction: row;
 }
 .monero-discourse-subscriptions-table {
   width: 100%;
