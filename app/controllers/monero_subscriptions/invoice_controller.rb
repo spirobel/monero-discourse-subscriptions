@@ -12,6 +12,10 @@ module MoneroDiscourseSubscriptions
                 render_json_error "plan does not exist"
                 return
             end
+            unless plan.active
+                render_json_error "plan does is not active"
+                return
+            end
             invoice = MoneroInvoice.where(recipient: current_user, monero_plan: plan).first
             if invoice.nil?
                 invoice = MoneroInvoice.create(recipient: current_user, buyer: current_user, monero_plan: plan)
