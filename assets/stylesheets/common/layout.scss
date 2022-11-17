@@ -56,10 +56,24 @@
 .ended{
   color: orangered;
 }
+.xmrlabel {
+  color: green;
+}
+.address-amount {
+  margin-top: 15px;
+}
 .wallet-primaryAddress {
   width: 200px;
   word-wrap: break-word;
   display: inline-block;
+}
+.xmraddress {
+  width: 200px;
+  word-wrap: break-word;
+  display: inline-block;
+}
+.invoice-container {
+  display: flex;
 }
 .monero-discourse-subscriptions-table {
   width: 100%;
