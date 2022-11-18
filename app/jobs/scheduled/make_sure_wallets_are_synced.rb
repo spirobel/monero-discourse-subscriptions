@@ -32,7 +32,7 @@ module ::Jobs
             unless wallets.empty?
             wallets.each { |k, wallet|
                 if wallet["path"].include? wallet_sql[:primaryAddress]
-                    if wallet.key?(:percentDone)
+                    if wallet.key?("percentDone")
                         syncing = true
                     end
                 end
