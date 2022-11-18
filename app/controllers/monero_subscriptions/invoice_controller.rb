@@ -22,7 +22,7 @@ module MoneroDiscourseSubscriptions
             end
             amount_old = true
             unless invoice.amount_date.nil?
-                amount_old = invoice.amount_date > (DateTime.current - 30.minutes)
+                amount_old = invoice.amount_date < (DateTime.current - 30.minutes)
             end
             if (invoice.amount.nil? || amount_old || params[:refresh])
                 synced = false
@@ -121,7 +121,7 @@ module MoneroDiscourseSubscriptions
                         # 2. check if the amount is old
                         amount_old = true 
                         unless invoice.amount_date.nil?
-                            amount_old = invoice.amount_date > (DateTime.current - 30.minutes)
+                            amount_old = invoice.amount_date < (DateTime.current - 30.minutes)
                         end
 
                         # 3. check if the amount is paid or not
