@@ -51,7 +51,6 @@ module ::Jobs
 
                 callbackSecret = SecureRandom.urlsafe_base64(20)
                 w = MoneroWallet.find_by_id(wallet_sql[:id])
-                w.update(callbackSecret: callbackSecret)
                 uri = URI.parse("http://localhost:3001/v1/wallet/sync")
                 request = Net::HTTP::Post.new(uri)
                 request.content_type = "application/json"
@@ -71,6 +70,9 @@ module ::Jobs
                   http.request(request)
                 end
                 puts response.body
+                unless response.body.include? "wallet already opened"
+                  w.update(callbackSecret: callbackSecret)
+                end
                 if response.body.include? "Wallet does not exist at path"
                   uri = URI.parse("http://localhost:3001/v1/wallet/initialize")
                   request = Net::HTTP::Post.new(uri)
