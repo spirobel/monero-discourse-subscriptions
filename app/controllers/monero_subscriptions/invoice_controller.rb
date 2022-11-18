@@ -4,8 +4,8 @@ require 'json'
 
 module MoneroDiscourseSubscriptions
     class InvoiceController < ::ApplicationController
-        requires_login
-      
+        requires_login except: [:callback]
+        skip_before_action :verify_authenticity_token, only: [:callback]
         def myinvoice
             plan = MoneroPlan.find_by_id(params[:plan_id])
             if plan.nil?
@@ -152,6 +152,9 @@ module MoneroDiscourseSubscriptions
                                     missing_amount: missing_amount_converted.to_s,
                                     amount_date: DateTime.current)
                                 #TODO send pm
+                                sendpm("Payment received, but there is still a missing amount!",
+                                    "Payment received, but there is still a missing amount!",
+                                    buyer.name)
                             end
                         end
                     end                    
@@ -234,9 +237,22 @@ module MoneroDiscourseSubscriptions
 
             invoice.update(paid: true)
              #TODO send pm
-
+            sendpm("Payment successful! Your subscription is now active",
+                "Payment successful! Your subscription is now active",
+                buyer.name)
         end
-     
+
+        def sendpm(title,message, target_username)
+            pm = {}
+            pm['title'] = title
+            pm['raw'] = message
+            pm['target_usernames'] = Array(target_username)
+            pm = pm.symbolize_keys
+            sender = Discourse.system_user.username
+            sender = User.find_by(username: sender)
+            pm = pm.merge(archetype: Archetype.private_message)
+            PostCreator.new(sender, pm).create
+        end
 
     end
 end

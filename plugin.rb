@@ -67,7 +67,7 @@ after_initialize do
     delete '/subscriptions/:id' => 'subscription#delete', constraints: AdminConstraint.new
     
     get '/myinvoice/:plan_id' => 'invoice#myinvoice'
-    post '/callbakc/:callback_secret' => 'invoice#callback'
+    post '/callback/:callback_secret' => 'invoice#callback'
 
   end
 
