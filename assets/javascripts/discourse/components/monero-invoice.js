@@ -18,7 +18,9 @@ pollTimeLeft(){
   return later(this,function(){
     if(this.invoice){
       this.set('minutesLeft',moment.duration(moment(this.invoice.amount_date).utc().valueOf() - moment().subtract(30, 'minutes').utc().valueOf()).humanize());
-
+      if(moment.duration(moment(this.invoice.amount_date).utc().valueOf() - moment().subtract(30, 'minutes').utc().valueOf()).as('milliseconds') <= 0){
+        console.log("refresh")
+      }
     }
       this.poller = this.pollTimeLeft();
   },1000);
