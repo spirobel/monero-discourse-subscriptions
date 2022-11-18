@@ -64,7 +64,7 @@ stagenet
   {{#unless noPlans}}
 
     {{#if isLoggedIn}}
-        {{monero-invoice invoice=invoice invoice_error=invoice_error selectedPlanId=selectedPlanId planClick=(action 'planClick')}}
+        {{monero-invoice invoice=invoice invoice_error=invoice_error selectedPlanId=selectedPlanId planClick=(action 'planClick') refreshInvoice=(action 'refreshInvoice') refreshed=refreshed}}
       {{/if}}
     {{/unless}}
 

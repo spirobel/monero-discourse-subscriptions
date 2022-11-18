@@ -19,15 +19,16 @@ pollTimeLeft(){
     if(this.invoice){
       this.set('minutesLeft',moment.duration(moment(this.invoice.amount_date).utc().valueOf() - moment().subtract(30, 'minutes').utc().valueOf()).humanize());
       if(moment.duration(moment(this.invoice.amount_date).utc().valueOf() - moment().subtract(30, 'minutes').utc().valueOf()).as('milliseconds') <= 0){
-        console.log("refresh")
+        this.refreshInvoice(this.invoice.monero_plan_id);
+
       }
     }
       this.poller = this.pollTimeLeft();
   },1000);
 },
   actions: {
-    refreshInvoice(invoice){
-      console.log(invoice)
+    refreshInvoice(){
+      this.refreshInvoice(this.invoice.monero_plan_id);
     }
   },
 });

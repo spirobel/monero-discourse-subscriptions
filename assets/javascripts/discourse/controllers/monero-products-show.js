@@ -3,6 +3,8 @@ import discourseComputed from "discourse-common/utils/decorators";
 import MoneroInvoice from "../models/monero-invoice";
 import User from "discourse/models/user";
 import { isEmpty } from "@ember/utils";
+import { later} from '@ember/runloop';
+
 
 export default Controller.extend({
     queryParams: ['selectedPlanId'],
@@ -31,6 +33,22 @@ export default Controller.extend({
               that.set('invoice_error', error.jqXHR.responseJSON.errors[0]);
             };
             MoneroInvoice.findMyInvoice(planid).then(found).catch(notfound);
+        },
+        refreshInvoice(planid){
+          let that = this;
+
+          let found = function(data){
+            that.set('invoice', data);
+            that.set("refreshed", true);
+            later(that,function(){
+              this.set("refreshed",false);
+
+            },1000);
+          };
+          let notfound = function(error){
+            that.set('invoice_error', error.jqXHR.responseJSON.errors[0]);
+          };
+          MoneroInvoice.findMyInvoiceRefresh(planid).then(found).catch(notfound);
         }
     },
     @discourseComputed()

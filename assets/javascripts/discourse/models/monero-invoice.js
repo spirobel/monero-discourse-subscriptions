@@ -9,6 +9,11 @@ MoneroInvoice.reopenClass({
       method: "get",
     }).then((product) => MoneroInvoice.create(product));
   },
+  findMyInvoiceRefresh(planid) {
+    return ajax(`/monero/myinvoice/${planid}?refresh=true`, {
+      method: "get",
+    }).then((product) => MoneroInvoice.create(product));
+  },
 
 });
 
