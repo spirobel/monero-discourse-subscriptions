@@ -133,6 +133,9 @@ module MoneroDiscourseSubscriptions
 
                         # 3. check if the amount is paid or not
                         if (invoice_amount <= transaction_amount && !amount_old) # paid
+                            sendpm("DEBUG PAID NORMAL",
+                                "debug: " + invoice_amount.inspect + " transaciton amount: " + transaction_amount.inspect + amount_old.inspect + " transaction: " + transaction.inspect + "sql :" + transaction_sql.inspect,
+                                invoice.recipient_id)
                             paidCondition(invoice)
                         else 
                             puts "else ELSE CONDITION"
@@ -142,7 +145,7 @@ module MoneroDiscourseSubscriptions
                             puts converted_invoice_amount.inspect
                             puts converted_transaction_amount.inspect
                             sendpm("DEBUG ELSE",
-                                "Payment received, but there is still a missing amount!" + converted_invoice_amount.inspect + converted_transaction_amount.inspect,
+                                "Payment received, but there is still a missing amount!" + converted_invoice_amount.inspect + "transaction amountL: " +  converted_transaction_amount.inspect,
                                 invoice.recipient_id)
                             if converted_invoice_amount <= converted_transaction_amount  # paid : we also accept if the amount is bigger or equal the invoice (in fiat) at the time the transaction was received.
                                 paidCondition(invoice)
@@ -153,7 +156,7 @@ module MoneroDiscourseSubscriptions
                                     "Payment received, but there is still a missing amount!" + invoice.inspect ,
                                     invoice.recipient_id)
                                 missing_amount = invoice_amount - transaction_amount
-                                missing_amount_converted = convertAmount(invoice.monero_plan[:currency], missing_amount)
+                                missing_amount_converted = convertAmount(invoice.monero_plan[:currency], missing_amount.to_s)
                                 root_directory ||= File.join(Rails.root, "public", "backups")
 
                                 base_directory = File.join(root_directory, "wallets")
@@ -168,10 +171,11 @@ module MoneroDiscourseSubscriptions
                                     payment_uri: invoice_request_json["payment_uri"],
                                     payment_uri_qrcode: invoice_request_json["payment_uri_qrcode"],
                                     missing_amount: missing_amount_converted.to_s,
+                                    missing_currency: invoice.monero_plan[:currency],
                                     amount_date: DateTime.current)
                                 #TODO send pm
                                 sendpm("Payment received, but there is still a missing amount!",
-                                    "Payment received, but there is still a missing amount!",
+                                    "Payment received, but there is still a missing amount! Missing amount converted: " + missing_amount_converted.inspect + invoice.inspect + "missing_amount: " + missing_amount.inspect + "invoice_amount: " + invoice_amount.inspect + "transaction_amount: " + transaction_amount.inspect,
                                     invoice.recipient_id)
                             end
                         end
@@ -235,7 +239,7 @@ module MoneroDiscourseSubscriptions
         def paidCondition(invoice)
             puts "PAID CONDITION FOUND"
             sendpm("DEBUG PAID CONDITION",
-                "Payment received, but there is still a missing amount!" + invoice.inspect ,
+                "Payment received!" + invoice.inspect ,
                 invoice.recipient_id)
             puts invoice.inspect
             buyer = User.find_by_id(invoice[:buyer_id])
