@@ -9,7 +9,6 @@
 stagenet
 </p>
   {{/if}}
-{{#if isLoggedIn}}
   <div class="product-purchase">
       {{#if product.subscribed}}
       <p class="purchased">&#x2713; {{i18n "monero_discourse_subscriptions.subscribe.subscribed_until"}} {{monero-format-datetime product.end_date}}
@@ -33,4 +32,3 @@ stagenet
         {{/link-to}}
     {{/if}}
 </div>
-{{/if}}
