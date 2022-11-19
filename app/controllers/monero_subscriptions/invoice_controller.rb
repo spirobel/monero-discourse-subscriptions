@@ -16,9 +16,9 @@ module MoneroDiscourseSubscriptions
                 render_json_error "plan is not active"
                 return
             end
-            invoice = MoneroInvoice.where(recipient: current_user, monero_plan: plan).first
+            invoice = MoneroInvoice.where(recipient: current_user, monero_plan: plan, paid: false).first
             if invoice.nil?
-                invoice = MoneroInvoice.create(recipient: current_user, buyer: current_user, monero_plan: plan)
+                invoice = MoneroInvoice.create(recipient: current_user, buyer: current_user, monero_plan: plan, paid: false)
             end
             amount_old = true
             unless invoice.amount_date.nil?
@@ -78,12 +78,16 @@ module MoneroDiscourseSubscriptions
         #"/monero/callback/" + callbackSecret
         #check if fullfils amount if not calcuclate missing amount in usd and send pm to recheck
         def callback
-            
-            wallet =  MoneroWallet.where(callbackSecret: params[:callback_secret]).first
+            puts request.inspect
+            wallet =  MoneroWallet.where(callbackSecret: callback_transaction_params[:callback_secret]).first
+            puts wallet.inspect
             if wallet
-                transactions = JSON.parse(request.raw_post)
-                transactions.each { |k, transaction|
-
+                callback_transaction_params[:transactions].each { |transaction, k|
+                    puts "WHOOHJA"
+                    puts k.inspect
+                    puts transaction.inspect
+                    puts "LOLOOL"
+                    puts transaction.inspect
                    #[ this is what a typical object in the array looks like
                    #     {
                    #       "payment_id": 0,
@@ -113,7 +117,10 @@ module MoneroDiscourseSubscriptions
 
                     end
                     invoice = MoneroInvoice.find_by_id(transaction[:payment_id])
+                    puts "INVOICE FOUND"
+                    puts invoice.inspect
                     if(invoice && !invoice[:paid] && transaction[:isConfirmed])
+
                         # 1. convert invoice and transaction amount to bignumber
                         invoice_amount = invoice[:amount].to_i 
                         transaction_amount = transaction[:amount].to_i
@@ -134,6 +141,8 @@ module MoneroDiscourseSubscriptions
                             if converted_invoice_amount <= converted_transaction_amount  # paid : we also accept if the amount is bigger or equal the invoice (in fiat) at the time the transaction was received.
                                 paidCondition(invoice)
                             else # not_paid : calculate the missing amount, send pm and make new invoice 
+                                puts "MISSING AMOUNT"
+                                puts invoice.inspect
                                 missing_amount = invoice_amount - transaction_amount
                                 missing_amount_converted = convertAmount(invoice.monero_plan[:currency], missing_amount)
                                 root_directory ||= File.join(Rails.root, "public", "backups")
@@ -215,10 +224,14 @@ module MoneroDiscourseSubscriptions
         end
 
         def paidCondition(invoice)
-
-            buyer = User.find_by_username(invoice[:buyer])
-            recipient = User.find_by_username(invoice[:recipient])
+            puts "PAID CONDITION FOUND"
+            puts invoice.inspect
+            buyer = User.find_by_id(invoice[:buyer_id])
+            recipient = User.find_by_id(invoice[:recipient_id])
             monero_plan = MoneroPlan.find_by_id(invoice[:monero_plan_id])
+            puts buyer.inspect
+            puts recipient.inspect
+            puts monero_plan.inspect
             currency = monero_plan[:currency]
             amount = monero_plan[:amount]
 
@@ -232,7 +245,7 @@ module MoneroDiscourseSubscriptions
                 end_date = DateTime.current + 100.years
             end
 
-            subscription = MoneroSubscription.create(buyer: buyer, recipient: recipient,
+            subscription = MoneroSubscription.create(monero_invoice: invoice, buyer: buyer, recipient: recipient,
             end: end_date, begin_date: begin_date, ended: false, monero_plan: monero_plan, amount: amount, currency: currency)
 
             invoice.update(paid: true)
@@ -252,6 +265,10 @@ module MoneroDiscourseSubscriptions
             sender = User.find_by(username: sender)
             pm = pm.merge(archetype: Archetype.private_message)
             PostCreator.new(sender, pm).create
+        end
+
+        def callback_transaction_params
+            params.permit(:callback_secret, :transactions => [:payment_id, :height, :amount,:confirmations, :isConfirmed])
         end
 
     end
