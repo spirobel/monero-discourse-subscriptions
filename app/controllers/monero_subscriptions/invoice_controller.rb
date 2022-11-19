@@ -135,14 +135,23 @@ module MoneroDiscourseSubscriptions
                         if (invoice_amount <= transaction_amount && !amount_old) # paid
                             paidCondition(invoice)
                         else 
+                            puts "else ELSE CONDITION"
+
                             converted_invoice_amount = convertAmount(invoice.monero_plan[:currency], invoice[:amount])
                             converted_transaction_amount = convertAmount(invoice.monero_plan[:currency], transaction[:amount])
-                            
+                            puts converted_invoice_amount.inspect
+                            puts converted_transaction_amount.inspect
+                            sendpm("DEBUG ELSE",
+                                "Payment received, but there is still a missing amount!" + converted_invoice_amount.inspect + converted_transaction_amount.inspect,
+                                invoice.recipient_id)
                             if converted_invoice_amount <= converted_transaction_amount  # paid : we also accept if the amount is bigger or equal the invoice (in fiat) at the time the transaction was received.
                                 paidCondition(invoice)
                             else # not_paid : calculate the missing amount, send pm and make new invoice 
                                 puts "MISSING AMOUNT"
                                 puts invoice.inspect
+                                sendpm("DEBUG MISsING AMOUNT",
+                                    "Payment received, but there is still a missing amount!" + invoice.inspect ,
+                                    invoice.recipient_id)
                                 missing_amount = invoice_amount - transaction_amount
                                 missing_amount_converted = convertAmount(invoice.monero_plan[:currency], missing_amount)
                                 root_directory ||= File.join(Rails.root, "public", "backups")
@@ -225,6 +234,9 @@ module MoneroDiscourseSubscriptions
 
         def paidCondition(invoice)
             puts "PAID CONDITION FOUND"
+            sendpm("DEBUG PAID CONDITION",
+                "Payment received, but there is still a missing amount!" + invoice.inspect ,
+                invoice.recipient_id)
             puts invoice.inspect
             buyer = User.find_by_id(invoice[:buyer_id])
             recipient = User.find_by_id(invoice[:recipient_id])
