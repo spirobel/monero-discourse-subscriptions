@@ -7,9 +7,15 @@ class MoneroSubscription < ActiveRecord::Base
   belongs_to :buyer, class_name: "User"
   belongs_to :recipient, class_name: "User"
   def buyer_name
+    if buyer.nil?
+      return nil
+    end
     return buyer.username
   end
   def recipient_name
+    if recipient.nil?
+      return nil
+    end
     return recipient.username
   end
   def product_name
