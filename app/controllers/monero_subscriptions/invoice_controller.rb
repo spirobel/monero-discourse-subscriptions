@@ -163,7 +163,7 @@ module MoneroDiscourseSubscriptions
                                 #TODO send pm
                                 sendpm("Payment received, but there is still a missing amount!",
                                     "Payment received, but there is still a missing amount!",
-                                    buyer.name)
+                                    invoice.recipient_id)
                             end
                         end
                     end                    
@@ -252,17 +252,17 @@ module MoneroDiscourseSubscriptions
              #TODO send pm
             sendpm("Payment successful! Your subscription is now active",
                 "Payment successful! Your subscription is now active",
-                buyer.name)
+                recipient.id)
         end
 
-        def sendpm(title,message, target_username)
+        def sendpm(title,message, target_user_id)
+            target = User.find_by_id(target_user_id)
             pm = {}
             pm['title'] = title
             pm['raw'] = message
-            pm['target_usernames'] = Array(target_username)
+            pm['target_usernames'] = Array(target.username)
             pm = pm.symbolize_keys
-            sender = Discourse.system_user.username
-            sender = User.find_by(username: sender)
+            sender = Discourse.system_user
             pm = pm.merge(archetype: Archetype.private_message)
             PostCreator.new(sender, pm).create
         end
