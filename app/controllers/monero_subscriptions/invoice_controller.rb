@@ -78,16 +78,9 @@ module MoneroDiscourseSubscriptions
         #"/monero/callback/" + callbackSecret
         #check if fullfils amount if not calcuclate missing amount in usd and send pm to recheck
         def callback
-            puts request.inspect
             wallet =  MoneroWallet.where(callbackSecret: callback_transaction_params[:callback_secret]).first
-            puts wallet.inspect
             if wallet
                 callback_transaction_params[:transactions].each { |transaction, k|
-                    puts "WHOOHJA"
-                    puts k.inspect
-                    puts transaction.inspect
-                    puts "LOLOOL"
-                    puts transaction.inspect
                    #[ this is what a typical object in the array looks like
                    #     {
                    #       "payment_id": 0,
@@ -106,7 +99,7 @@ module MoneroDiscourseSubscriptions
                             height: transaction[:height],
                             tx_hash: transaction[:tx_hash],
                             confirmations: transaction[:confirmations],
-                            isConfirmed: transaction[:isConfirmed])
+                            isConfirmed: transaction[:isConfirmed], pm: false)
                     end
                     if transaction_sql[:confirmations] < transaction[:confirmations]
                         transaction_sql.update(confirmations: transaction[:confirmations])
@@ -117,9 +110,8 @@ module MoneroDiscourseSubscriptions
 
                     end
                     invoice = MoneroInvoice.find_by_id(transaction[:payment_id])
-                    puts "INVOICE FOUND"
-                    puts invoice.inspect
-                    if(invoice && !invoice[:paid] && transaction[:isConfirmed])
+
+                    if(invoice && !invoice[:paid] && transaction[:isConfirmed] && !transaction_sql[:pm])
 
                         # 1. convert invoice and transaction amount to bignumber
                         invoice_amount = invoice[:amount].to_i 
@@ -133,28 +125,22 @@ module MoneroDiscourseSubscriptions
 
                         # 3. check if the amount is paid or not
                         if (invoice_amount <= transaction_amount && !amount_old) # paid
-                            sendpm("DEBUG PAID NORMAL",
-                                "debug: " + invoice_amount.inspect + " transaciton amount: " + transaction_amount.inspect + amount_old.inspect + " transaction: " + transaction.inspect + "sql :" + transaction_sql.inspect,
-                                invoice.recipient_id)
                             paidCondition(invoice)
+                            transaction_sql.update(pm: true)
                         else 
-                            puts "else ELSE CONDITION"
-
                             converted_invoice_amount = convertAmount(invoice.monero_plan[:currency], invoice[:amount])
                             converted_transaction_amount = convertAmount(invoice.monero_plan[:currency], transaction[:amount])
-                            puts converted_invoice_amount.inspect
-                            puts converted_transaction_amount.inspect
-                            sendpm("DEBUG ELSE",
-                                "Payment received, but there is still a missing amount!" + converted_invoice_amount.inspect + "transaction amountL: " +  converted_transaction_amount.inspect,
+                            if converted_transaction_amount <= 0.01
+                                sendpm("The transaction amount was below 1 cent. Please send more!",
+                                "The payment you sent was so low that we can't credit it to prevent abuse of our systems. Please send larger transactions!" ,
                                 invoice.recipient_id)
+                                transaction_sql.update(pm: true)
+                                return
+                            end
                             if converted_invoice_amount <= converted_transaction_amount  # paid : we also accept if the amount is bigger or equal the invoice (in fiat) at the time the transaction was received.
                                 paidCondition(invoice)
+                                transaction_sql.update(pm: true)
                             else # not_paid : calculate the missing amount, send pm and make new invoice 
-                                puts "MISSING AMOUNT"
-                                puts invoice.inspect
-                                sendpm("DEBUG MISsING AMOUNT",
-                                    "Payment received, but there is still a missing amount!" + invoice.inspect ,
-                                    invoice.recipient_id)
                                 missing_amount = invoice_amount - transaction_amount
                                 missing_amount_converted = convertAmount(invoice.monero_plan[:currency], missing_amount.to_s)
                                 root_directory ||= File.join(Rails.root, "public", "backups")
@@ -174,9 +160,10 @@ module MoneroDiscourseSubscriptions
                                     missing_currency: invoice.monero_plan[:currency],
                                     amount_date: DateTime.current)
                                 #TODO send pm
-                                sendpm("Payment received, but there is still a missing amount!",
-                                    "Payment received, but there is still a missing amount! Missing amount converted: " + missing_amount_converted.inspect + invoice.inspect + "missing_amount: " + missing_amount.inspect + "invoice_amount: " + invoice_amount.inspect + "transaction_amount: " + transaction_amount.inspect,
+                                sendpm("Payment for " + invoice.monero_plan.monero_product.name.to_s + " received, but there is still a missing amount!",
+                                    "We received your payment for " + invoice.monero_plan.monero_product.name.to_s + ", but there is still a missing amount! Please send an additional " + missing_amount_converted.to_s + invoice.monero_plan[:currency].to_s + ". [Click here for to access the invoice!](monero/products/" + invoice.monero_plan.monero_product_id.to_s + "?selectedPlanId=" + invoice.moneroplan_id.to_s,
                                     invoice.recipient_id)
+                                transaction_sql.update(pm: true)
                             end
                         end
                     end                    
@@ -237,17 +224,10 @@ module MoneroDiscourseSubscriptions
         end
 
         def paidCondition(invoice)
-            puts "PAID CONDITION FOUND"
-            sendpm("DEBUG PAID CONDITION",
-                "Payment received!" + invoice.inspect ,
-                invoice.recipient_id)
-            puts invoice.inspect
             buyer = User.find_by_id(invoice[:buyer_id])
             recipient = User.find_by_id(invoice[:recipient_id])
             monero_plan = MoneroPlan.find_by_id(invoice[:monero_plan_id])
-            puts buyer.inspect
-            puts recipient.inspect
-            puts monero_plan.inspect
+
             currency = monero_plan[:currency]
             amount = monero_plan[:amount]
 
@@ -266,8 +246,8 @@ module MoneroDiscourseSubscriptions
 
             invoice.update(paid: true)
              #TODO send pm
-            sendpm("Payment successful! Your subscription is now active",
-                "Payment successful! Your subscription is now active",
+            sendpm("Payment successful! Your subscription for " + monero_plan.monero_product.name.to_s + "is now active",
+                "Payment successful! You just bought " + monero_plan.monero_product.name.to_s + ". You are now subscribed and a member of the " + monero_plan.monero_product.group.name.to_s + " group",
                 recipient.id)
         end
 
