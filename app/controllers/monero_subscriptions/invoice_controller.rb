@@ -92,7 +92,7 @@ module MoneroDiscourseSubscriptions
                    #     }
                    #   ]
 
-                    transaction_sql = MoneroPayment.where(payment_id: transaction[:payment_id]).first
+                    transaction_sql = MoneroPayment.where(tx_hash: transaction[:tx_hash]).first
                     unless transaction_sql
                         transaction_sql = MoneroPayment.create(payment_id: transaction[:payment_id],
                             amount: transaction[:amount],
