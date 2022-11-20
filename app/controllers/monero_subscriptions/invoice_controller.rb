@@ -161,7 +161,7 @@ module MoneroDiscourseSubscriptions
                                     amount_date: DateTime.current)
                                 #TODO send pm
                                 sendpm("Payment for " + invoice.monero_plan.monero_product.name.to_s + " received, but there is still a missing amount!",
-                                    "We received your payment for " + invoice.monero_plan.monero_product.name.to_s + ", but there is still a missing amount! Please send an additional " + missing_amount_converted.round(2).to_s + " " + invoice.monero_plan[:currency].to_s + ". [Click here for to access the invoice!](monero/products/" + invoice.monero_plan.monero_product_id.to_s + "?selectedPlanId=" + invoice.monero_plan_id.to_s + ")",
+                                    "We received your payment for " + invoice.monero_plan.monero_product.name.to_s + ", but there is still a missing amount! Please send an additional " + missing_amount_converted.round(2).to_s + " " + invoice.monero_plan[:currency].to_s + ". [Click here for to access the invoice!](/monero/products/" + invoice.monero_plan.monero_product_id.to_s + "?selectedPlanId=" + invoice.monero_plan_id.to_s + ")",
                                     invoice.recipient_id)
                                 transaction_sql.update(pm: true)
                             end
