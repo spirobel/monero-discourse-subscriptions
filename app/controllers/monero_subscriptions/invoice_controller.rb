@@ -264,7 +264,7 @@ module MoneroDiscourseSubscriptions
         end
 
         def callback_transaction_params
-            params.permit(:callback_secret, :transactions => [:payment_id, :height, :amount,:confirmations, :isConfirmed])
+            params.permit(:callback_secret, :transactions => [:payment_id, :height, :amount,:confirmations, :isConfirmed, :tx_hash])
         end
 
     end
