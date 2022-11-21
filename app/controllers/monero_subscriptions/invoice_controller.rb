@@ -71,7 +71,7 @@ module MoneroDiscourseSubscriptions
                     payment_uri_qrcode: invoice_request_json["payment_uri_qrcode"],
                     amount_date: DateTime.current)
             end
-            render_json_dump invoice
+            render :json => invoice.to_json( :include => [:monero_payments])
 
         end
 
@@ -112,6 +112,8 @@ module MoneroDiscourseSubscriptions
                     invoice = MoneroInvoice.find_by_id(transaction[:payment_id])
 
                     if(invoice && !invoice[:paid] && transaction[:isConfirmed] && !transaction_sql[:pm])
+                        
+                        transaction_sql.update(monero_invoice: invoice)
 
                         # 1. convert invoice and transaction amount to bignumber
                         invoice_amount = invoice[:amount].to_i 
