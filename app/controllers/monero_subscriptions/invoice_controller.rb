@@ -164,6 +164,8 @@ module MoneroDiscourseSubscriptions
                                     "We received your payment for " + invoice.monero_plan.monero_product.name.to_s + ", but there is still a missing amount! Please send an additional " + missing_amount_converted.round(2).to_s + " " + invoice.monero_plan[:currency].to_s + ". [Click here for to access the invoice!](/monero/products/" + invoice.monero_plan.monero_product_id.to_s + "?selectedPlanId=" + invoice.monero_plan_id.to_s + ")",
                                     invoice.recipient_id)
                                 transaction_sql.update(pm: true)
+                                transaction_sql.update(arrival_amount: converted_transaction_amount.to_s,
+                                                        currency: invoice.monero_plan[:currency])
                             end
                         end
                     end                    
