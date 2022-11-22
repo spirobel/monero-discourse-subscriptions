@@ -51,7 +51,9 @@ module MoneroDiscourseSubscriptions
 
         def mysubscriptions
             subscriptions = MoneroSubscription.where(recipient: current_user).order(created_at: :desc)
-            render :json => subscriptions.to_json( :include => [:monero_payments],:methods => [:buyer_name, :recipient_name, :product_name, :duration, :invoice] )
+            open_invoices =  MoneroInvoice.joins(:monero_payments).where(paid: false, recipient: current_user).to_json( :include => [:monero_payments])
+            subs_json = subscriptions.to_json( :include => [:monero_payments],:methods => [:buyer_name, :recipient_name, :product_name, :duration, :invoice] )
+            render :json => JSON.dump({open_invoices:JSON.parse(open_invoices), subscriptions:(JSON.parse(subs_json))})
         end
         
         def delete
