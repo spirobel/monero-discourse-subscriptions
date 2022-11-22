@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class MoneroSubscription < ActiveRecord::Base
   belongs_to :monero_invoice
-  
+  has_many :monero_payments, through: :monero_invoice
   belongs_to :monero_product
   belongs_to :monero_plan
   belongs_to :buyer, class_name: "User"
@@ -23,6 +23,9 @@ class MoneroSubscription < ActiveRecord::Base
   end
   def duration
     return monero_plan.duration
+  end
+  def invoice
+    return monero_invoice
   end
 end
 

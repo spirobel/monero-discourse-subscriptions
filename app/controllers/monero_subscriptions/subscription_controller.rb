@@ -41,17 +41,17 @@ module MoneroDiscourseSubscriptions
             if params[:recipient] && !params[:recipient].empty?
                 recipient = User.find_by_username(params[:recipient])
                 subscriptions = MoneroSubscription.where(recipient: recipient).order(created_at: :desc).limit(10).offset(page * 10)
-                render :json => subscriptions.to_json( :include => [:buyer, :recipient],:methods => [:buyer_name, :recipient_name, :product_name, :duration] )
+                render :json => subscriptions.to_json( :include => [:monero_payments],:methods => [:buyer_name, :recipient_name, :product_name, :duration, :invoice] )
             else
 
                 subscriptions = MoneroSubscription.order(created_at: :desc).limit(10).offset(page * 10)
-                render :json => subscriptions.to_json( :include => [:buyer, :recipient],:methods => [:buyer_name, :recipient_name, :product_name, :duration] )
+                render :json => subscriptions.to_json( :include => [:monero_payments],:methods => [:buyer_name, :recipient_name, :product_name, :duration, :invoice] )
             end
         end
 
         def mysubscriptions
             subscriptions = MoneroSubscription.where(recipient: current_user).order(created_at: :desc)
-            render :json => subscriptions.to_json( :include => [:buyer, :recipient],:methods => [:buyer_name, :recipient_name, :product_name, :duration] )
+            render :json => subscriptions.to_json( :include => [:monero_payments],:methods => [:buyer_name, :recipient_name, :product_name, :duration, :invoice] )
         end
         
         def delete
