@@ -2,6 +2,8 @@ import Component from "@ember/component";
 import MoneroSubscription from "../models/monero-subscription";
 import discourseComputed from "discourse-common/utils/decorators";
 import { isEmpty } from "@ember/utils";
+import showModal from 'discourse/lib/show-modal';
+
 
 export default Component.extend({
     subscriptions: null,
@@ -16,7 +18,9 @@ export default Component.extend({
 
     actions: {
           showInvoice(subscription) {
-            console.log("showInvoice", subscription)
+            showModal('show-monero-invoice', {
+              model: {payments: subscription.monero_payments, product_name: subscription.product_name, duration: subscription.duration}
+            });
           },
     },
     @discourseComputed("subscriptions")

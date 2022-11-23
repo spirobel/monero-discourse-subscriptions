@@ -1,0 +1,40 @@
+{{#d-modal-body  title=title}}
+<h3>{{model.product_name}}, {{monero-format-duration model.duration}} plan</h3>
+
+
+
+<table class="table monero-discourse-tx-table ">
+  <thead>
+    <th>tx_hash</th>
+    <th>height</th>
+    <th>xmr amount</th>
+    <th>fiat amount</th>
+
+
+  </thead>
+  <tbody>
+        {{#each model.payments as |payment|}}
+      <tr>
+        <td><div class="tx_hash">{{payment.tx_hash}}</div></td>
+        <td> {{payment.height}}</td>
+        <td>{{monero-format-txamount payment.amount}}</td>
+        <td></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+
+
+
+{{/d-modal-body}}
+
+<div class="modal-footer">
+  {{d-button
+    action=(action "closeModal")
+    label="close"
+    title="close"
+    icon="times"
+    class="btn btn-icon"
+  }}
+</div>

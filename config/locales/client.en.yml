@@ -5,6 +5,8 @@ en:
     monero_discourse_subscriptions_enabled:
       placeholder: placeholder
     monero_discourse_subscriptions:
+      invoice:
+        show_invoice_title: Invoice
       plans:
         select: Select subscription plan
         select_prolong: Select subscription plan to prolong
