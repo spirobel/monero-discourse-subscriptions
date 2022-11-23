@@ -5,10 +5,12 @@ import { isEmpty } from "@ember/utils";
 
 export default Component.extend({
     subscriptions: null,
+    open_invoices: null,
     didInsertElement(){
         let that = this;
         MoneroSubscription.findAll().then(data=>{
-            that.set('subscriptions', data);
+            that.set('subscriptions', data.subscriptions);
+            that.set('open_invoices', data.open_invoices);
         });
     },
 
@@ -20,5 +22,9 @@ export default Component.extend({
     @discourseComputed("subscriptions")
     currentlyNoSubscriptions(subscriptions){
       return isEmpty(subscriptions);
+    },
+    @discourseComputed("open_invoices")
+    currentlyNoOpenInvoices(open_invoices){
+      return isEmpty(open_invoices);
     },
 });

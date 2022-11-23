@@ -1,4 +1,13 @@
-
+{{#unless currentlyNoOpenInvoices}}
+  <div style="color:orange">
+    you have open invoices with missing amounts: 
+  </div>
+        {{#each open_invoices as |open_invoice|}}
+        <a href="/monero/products/{{open_invoice.monero_product.id}}?selectedPlanId={{open_invoice.monero_plan_id}}" >{{open_invoice.monero_product.name}}, {{monero-format-duration open_invoice.monero_plan.duration}} plan
+      missing: {{monero-format-amount open_invoice.missing_amount open_invoice.missing_currency}}
+      </a>
+    {{/each}}
+{{/unless}}
 {{#if currentlyNoSubscriptions}}
 <div>
   <span>
