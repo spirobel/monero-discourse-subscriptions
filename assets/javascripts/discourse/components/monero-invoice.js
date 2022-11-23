@@ -1,5 +1,6 @@
 import Component from "@ember/component";
 import { cancel, later, next } from '@ember/runloop';
+import showModal from 'discourse/lib/show-modal';
 
 
 export default Component.extend({
@@ -29,6 +30,11 @@ pollTimeLeft(){
   actions: {
     refreshInvoice(){
       this.refreshInvoice(this.invoice.monero_plan_id);
-    }
+    },
+    showInvoice(invoice) {
+      showModal('show-monero-invoice', {
+        model: {payments: invoice.monero_payments}
+      });
+    },
   },
 });

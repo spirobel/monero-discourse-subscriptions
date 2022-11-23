@@ -1,6 +1,11 @@
 {{#if invoice_error}}
 <div class="invoice-error">{{invoice_error}}</div>
 {{else}}
+  {{#if invoice.missing_amount}}
+  <span style="color:orange">
+    we received your transaction, but there is still a missing amount:  {{monero-format-amount invoice.missing_amount invoice.missing_currency}}
+  </span> <span style="color:grey;cursor:pointer " onclick={{action "showInvoice" invoice}}>details... </span>
+{{/if}}
 <div class="invoice-container">
     <a href="{{invoice.payment_uri}}"><img src="{{invoice.payment_uri_qrcode}}"></a>
     <div class="address-amount">
