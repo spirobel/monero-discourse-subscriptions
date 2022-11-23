@@ -32,8 +32,14 @@ pollTimeLeft(){
       this.refreshInvoice(this.invoice.monero_plan_id);
     },
     showInvoice(invoice) {
+      let duration = 0;
+      for (const x of this.plans) {
+        if(x.id === Number(this.selectedPlanId)){
+          duration = x.duration;
+        }
+      }
       showModal('show-monero-invoice', {
-        model: {payments: invoice.monero_payments}
+        model: {payments: invoice.monero_payments, product_name: this.product_name, duration}
       });
     },
   },
