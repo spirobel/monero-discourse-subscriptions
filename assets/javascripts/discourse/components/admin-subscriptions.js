@@ -4,6 +4,8 @@ import discourseComputed from "discourse-common/utils/decorators";
 import { inject as service } from "@ember/service";
 import { isEmpty } from "@ember/utils";
 import { later} from '@ember/runloop';
+import showModal from 'discourse/lib/show-modal';
+
 
 
 
@@ -54,7 +56,12 @@ export default Component.extend({
                 this.reloadModel();
             }
 
-          }
+          },
+          showInvoice(subscription) {
+            showModal('show-monero-invoice', {
+              model: {payments: subscription.monero_payments, product_name: subscription.product_name, duration: subscription.duration}
+            });
+          },
     },
     @discourseComputed("page")
     pageZero(page){

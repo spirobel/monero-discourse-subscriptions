@@ -39,6 +39,11 @@
         <td>{{monero-format-datetime subscription.begin_date}}</td>
         <td>{{monero-format-datetime subscription.end }}</td>
         <td class="td-right">
+                    {{d-button
+            action=(action "showInvoice" subscription)
+            icon="far-credit-card"
+            class="btn no-text btn-icon"
+          }}
           {{#unless subscription.ended}}
 
           {{d-button
