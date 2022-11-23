@@ -18,7 +18,9 @@
         <td><div class="tx_hash">{{payment.tx_hash}}</div></td>
         <td> {{payment.height}}</td>
         <td>{{monero-format-txamount payment.amount}}</td>
-        <td>{{monero-format-amount payment.arrival_amount payment.currency}}</td>
+        <td>{{#if payment.arrival_amount}}
+          {{monero-format-amount payment.arrival_amount payment.currency}}
+          {{/if}}</td>
       </tr>
     {{/each}}
   </tbody>
