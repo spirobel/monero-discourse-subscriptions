@@ -13,6 +13,8 @@ en:
       subscribe:
         unauthenticated: Log in or create an account to subscribe.
         title: Subscribe
+        card:
+          title: Payment
         prolong: Prolong!
         subscribed_until: "You are subscribed until:"
         no_products: There are currently no products available.
