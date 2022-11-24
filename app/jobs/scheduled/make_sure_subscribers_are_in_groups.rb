@@ -29,7 +29,7 @@ module ::Jobs
             subscription.update(ended: true)
 
             sendpm("Subscription ended! Your subscription for " + subscription.monero_plan.monero_product.name.to_s + " has just ended!",
-              "Subscription ended! Your subscription for " + subscription.monero_plan.monero_product.name.to_s + " has just ended! You are now no longer member of the " + subscription.monero_plan.monero_product.group.name.to_s + " group until you prolong your subscription. [click here to prolong!](/monero/products/" + subscription.monero_plan.monero_product_id.to_s + "?selectedPlanId=" + subscription.monero_plan_id.to_s + ")",
+              "Subscription ended! Your subscription for " + subscription.monero_plan.monero_product.name.to_s + " has just ended! You are now no longer member of the " + subscription.monero_plan.monero_product.group.name.to_s + " group until you prolong your subscription. [click here to prolong!](/monero/products/" + subscription.monero_plan.monero_product_id.to_s + "?selectedPlanId=" + subscription.monero_plan_id.to_s + "). If you already prolonged your subscription, you can ignore this message!",
               user.id)
           end
         }
