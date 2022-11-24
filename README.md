@@ -44,7 +44,9 @@ run:
   - exec: echo "End of custom commands"
 
 ```
-Add the section from `wallet-service/monerochan-merchant-rpc.yml` in there:
+Add the section from `wallet-service/monerochan-merchant-rpc.yml` in there but with the right path for production! The beginning og the path is `/var/www/discourse/` instead of `/src/`.
+
+Just copy and paste this:
 ``` yaml
  - file:
      path: /etc/service/monerochan_merchant_rpc/run
@@ -52,7 +54,7 @@ Add the section from `wallet-service/monerochan-merchant-rpc.yml` in there:
      contents: |
         #!/bin/sh
         exec 2>&1
-        exec /src/plugins/monero-discourse-subscriptions/wallet-service/monerochan-merchant-rpc
+        exec /var/www/discourse/plugins/monero-discourse-subscriptions/wallet-service/monerochan-merchant-rpc
 ```
 This needs to be done so the monerochan-merchant-rpc runs in the background. It deals with the payments, invoices, wallets etc. You can read more about it [HERE](https://github.com/spirobel/monerochan-merchant-rpc)! You can use it to easily integrate monero into you own apps and services!
 
