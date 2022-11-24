@@ -6,9 +6,14 @@ export default Component.extend({
   classNames: ["wallet"],
   @discourseComputed("walletstatus", "wallet.primaryAddress")
   ws(walletstatus,primaryAddress){
-    let key = "/src/public/backups/wallets/"+primaryAddress;
+
     if(walletstatus){
-      return walletstatus[key];
+      for (const k in walletstatus) {
+
+       if(k.includes(primaryAddress)){
+        return walletstatus[k];
+       }
+      }
     } else {
       return {};
     }
