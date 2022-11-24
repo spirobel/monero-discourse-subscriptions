@@ -21,8 +21,8 @@
 please make sure your transaction arrives within <span class="conversionRateValid"> {{minutesLeft}}
 </span>
 <br>
-if you need more time please press {{#ds-button
-  action=(action "refreshInvoice" invoice)
- class="btn btn-primary btn-small"}}refresh rate{{/ds-button}} {{#if refreshed}}<span class="refreshed"> ...refreshed</span>{{/if}}<br>
+if you need more time please press <DButton
+  @action={{action "refreshInvoice" invoice}}
+ @class="btn btn-primary btn-small">refresh rate</DButton> {{#if refreshed}}<span class="refreshed"> ...refreshed</span>{{/if}}<br>
 <span class="gray-tip" >(dont hit the refresh rate button after you sent the transaction as the conversion rate will change)</span>
 {{/if }}

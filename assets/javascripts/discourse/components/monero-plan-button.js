@@ -8,7 +8,7 @@ export default Component.extend({
         }
       },
   @discourseComputed("selectedPlanId")
-  selected(selectedPlanId){
-    return this.plan.id == selectedPlanId;
+  selectedClass(planId) {
+    return Number(planId) === this.plan.id ? "btn-monero-discourse-subscriptions-subscribe btn-primary" : "btn-monero-discourse-subscriptions-subscribe";
   },
 });

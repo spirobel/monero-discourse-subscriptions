@@ -1,8 +1,7 @@
-{{#ds-button
-  action=(action "planClick" plan.id)
-  selected=selected
-  class="btn-monero-discourse-subscriptions-subscribe"
-}}
+
+<DButton
+  @action={{action "planClick" plan.id}} @class={{selectedClass}}>
+
   <div class="monero-interval">
         {{display-duration duration=plan.duration}}
  </div>
@@ -11,4 +10,4 @@
 {{monero-format-currency plan.currency plan.amount}}
   </span>
 
-{{/ds-button}}
+</DButton>
